@@ -1,0 +1,130 @@
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS  —  AgroSage
+   ───────────────────────────────────────────────
+   Canonical single source for ALL CSS variables.
+   No value is defined more than once. All files
+   consume from here; none override these names.
+═══════════════════════════════════════════════ */
+:root {
+  /* ── Brand palette ── */
+  --forest:    #1C3829;
+  --moss:      #2D5A3D;
+  --sage:      #5A8A6A;
+  --mint:      #8CC5A0;
+  --cream:     #F7F2E8;
+  --parchment: #EDE5D0;
+  --amber:     #C9923A;
+  --gold:      #E8B84B;
+  --earth:     #8B5E3C;
+  --charcoal:  #2A2A2A;
+  --white:     #FFFFFF;
+  --danger:    #C0392B;
+  --success:   #27AE60;
+
+  /* ── Clean UI design system (cards, forms, panels) ── */
+  --text-primary:   #1f2937;
+  --text-secondary: #374151;
+  --text-muted:     #6b7280;
+  --bg-card:        #ffffff;
+  --bg-input:       #f9fafb;
+  --bg-subtle:      #f3f4f6;
+  --border:         #e5e7eb;
+  --border-focus:   #1c3829;
+  --accent:         #1c3829;
+  --success-ui:     #15803d;
+  --success-bg:     #dcfce7;
+  --success-text:   #14532d;
+  --warning-ui:     #d97706;
+  --warning-bg:     #fffbeb;
+  --warning-text:   #92400e;
+  --warning-border: #f59e0b;
+  --danger-ui:      #dc2626;
+  --danger-bg:      #fef2f2;
+  --danger-text:    #991b1b;
+
+  /* ── Typography ── */
+  --ff-display: 'Playfair Display', Georgia, serif;
+  --ff-body:    'DM Sans', system-ui, sans-serif;
+  --ff-mono:    'Space Mono', monospace;
+
+  /* ── Radii ── */
+  --r-xs:  4px;
+  --r-sm:  8px;
+  --r-md:  16px;
+  --r-lg:  24px;
+  --r-xl:  40px;
+
+  /* ── Shadows ── */
+  --shadow-xs: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-sm: 0 2px 8px  rgba(28,56,41,.08);
+  --shadow-md: 0 8px 32px rgba(28,56,41,.14);
+  --shadow-lg: 0 20px 60px rgba(28,56,41,.18);
+
+  /* ── Motion ── */
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  --transition-fast: 0.15s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ═══════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════ */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+html { scroll-behavior:smooth; font-size:16px }
+body {
+  font-family: var(--ff-body);
+  background:  var(--cream);
+  color:       var(--charcoal);
+  min-height:  100vh;
+  overflow-x:  hidden;
+}
+img    { max-width:100%; display:block }
+button { cursor:pointer; border:none; font-family:var(--ff-body) }
+input, select, textarea { font-family:var(--ff-body) }
+a { text-decoration:none; color:inherit }
+
+/* ═══════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════ */
+::-webkit-scrollbar { width:6px }
+::-webkit-scrollbar-track { background:var(--parchment) }
+::-webkit-scrollbar-thumb { background:var(--sage); border-radius:3px }
+
+/* ═══════════════════════════════════════════════
+   SPA ROUTING
+═══════════════════════════════════════════════ */
+.page { display:none }
+.page.active { display:block }
+
+/* ═══════════════════════════════════════════════
+   SECTION WRAPPER
+═══════════════════════════════════════════════ */
+.section {
+  padding: 5rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.section-tag {
+  display: inline-flex; align-items:center; gap:6px;
+  font-size:0.75rem; font-weight:600;
+  color:var(--sage); letter-spacing:1.5px; text-transform:uppercase;
+  margin-bottom:0.75rem;
+}
+.section-title {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem,4vw,3rem);
+  font-weight: 800;
+  color: var(--forest);
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+}
+.section-sub {
+  font-size:1.05rem; line-height:1.65;
+  color: var(--text-muted);
+  max-width: 560px;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px) }
+  to   { opacity:1; transform:translateY(0) }
+}

@@ -1,0 +1,50 @@
+/* ═══════════════════════════════════════════════
+   DASHBOARD CHARTS
+═══════════════════════════════════════════════ */
+.dash-bg{background:var(--forest)}
+.dash-bg .section-tag{color:var(--mint)}
+.dash-bg .section-title{color:var(--cream)}
+.dash-bg .section-sub{color:rgba(247,242,232,0.6)}
+.charts-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:2rem;
+  margin-top:3rem;
+}
+.chart-card{
+  background:rgba(247,242,232,0.05);
+  border:1px solid rgba(247,242,232,0.1);
+  border-radius:var(--r-lg);
+  padding:1.75rem;
+}
+.chart-title{
+  font-family:var(--ff-display);
+  font-size:1.1rem;font-weight:700;color:var(--cream);
+  margin-bottom:1.5rem;
+}
+.chart-canvas{max-height:280px}
+.mini-chart-stack{display:flex;flex-direction:column;gap:1.5rem}
+.param-influence{
+  background:rgba(247,242,232,0.05);
+  border:1px solid rgba(247,242,232,0.1);
+  border-radius:var(--r-lg);
+  padding:1.5rem;
+}
+.pi-title{
+  font-family:var(--ff-display);
+  font-size:1rem;font-weight:700;color:var(--cream);
+  margin-bottom:1.2rem;
+}
+.pi-row{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:0.8rem;
+}
+.pi-name{font-size:0.82rem;color:rgba(247,242,232,0.7);width:90px}
+.pi-bar-bg{flex:1;height:6px;background:rgba(247,242,232,0.1);border-radius:3px;overflow:hidden}
+.pi-bar-fill{height:100%;border-radius:3px;transition:width 1.2s ease}
+.pi-pct{
+  font-family:var(--ff-mono);
+  font-size:0.75rem;color:var(--gold);width:36px;text-align:right;
+}
+
+@media(max-width:1024px){.charts-grid{grid-template-columns:1fr}}

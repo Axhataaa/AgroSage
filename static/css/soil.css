@@ -1,0 +1,163 @@
+/* ═══════════════════════════════════════════════
+   SOIL ANALYSIS GUIDE PAGE  —  clean design system
+   No var(--muted) on body text, no parchment
+   backgrounds, no faded range bars.
+═══════════════════════════════════════════════ */
+
+/* Page background: stay on cream for the section */
+.soil-bg { background: var(--cream) }
+
+/* ── Grid ── */
+.soil-grid {
+  display:               grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:                   1.5rem;
+  margin-top:            3rem;
+}
+
+/* ── Card ── */
+.soil-card {
+  background:    var(--bg-card);           /* #ffffff — pure white */
+  border-radius: var(--r-lg);
+  overflow:      hidden;
+  box-shadow:    var(--shadow-xs);
+  border:        1px solid var(--border);  /* #e5e7eb */
+  transition:    transform var(--transition),
+                 box-shadow var(--transition);
+}
+.soil-card:hover {
+  transform:  translateY(-4px);
+  box-shadow: 0 8px 28px rgba(28,56,41,.12);
+}
+
+/* ── Card header ── */
+.soil-card-header {
+  padding:     1.4rem 1.5rem 1rem;
+  display:     flex;
+  align-items: flex-start;
+  gap:         13px;
+}
+.soil-icon-wrap {
+  width:           46px;
+  height:          46px;
+  border-radius:   12px;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       1.4rem;
+  flex-shrink:     0;
+}
+.soil-card-name {
+  font-family:   var(--ff-display);
+  font-size:     1.05rem;
+  font-weight:   700;
+  color:         var(--accent);            /* #1c3829 */
+  margin-bottom: 2px;
+  line-height:   1.2;
+}
+.soil-card-sym {
+  font-size:   0.75rem;
+  font-weight: 500;
+  color:       var(--text-secondary);      /* #374151 — NOT muted */
+  font-family: var(--ff-mono);
+}
+
+/* ── Range visualiser ── */
+.soil-range {
+  padding: 0 1.5rem 0.75rem;
+}
+.soil-range-label {
+  display:         flex;
+  justify-content: space-between;
+  font-size:       0.72rem;
+  font-weight:     500;
+  color:           var(--text-muted);      /* #6b7280 — acceptable for axis labels */
+  margin-bottom:   7px;
+}
+.soil-range-bar {
+  height:        9px;
+  border-radius: 5px;
+  background:    var(--border);            /* #e5e7eb — clearly visible track */
+  position:      relative;
+  overflow:      visible;
+}
+.soil-range-fill {
+  position:      absolute;
+  top:           0;
+  height:        100%;
+  border-radius: 5px;
+  background:    linear-gradient(90deg, var(--sage), var(--accent));
+}
+.soil-range-marker {
+  position:      absolute;
+  top:           -4px;
+  width:         16px;
+  height:        16px;
+  border-radius: 50%;
+  background:    var(--bg-card);
+  border:        2.5px solid var(--accent);
+  box-shadow:    0 1px 6px rgba(28,56,41,.25);
+  transform:     translateX(-50%);
+  cursor:        default;
+}
+
+/* ── Description text ── */
+.soil-ideal {
+  padding:     0 1.5rem 1.5rem;
+  font-size:   0.83rem;
+  line-height: 1.6;
+  color:       var(--text-secondary);      /* #374151 — fully readable */
+}
+.soil-ideal strong {
+  color:       var(--accent);
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════
+   IMPROVEMENT TIPS SECTION
+═══════════════════════════════════════════════ */
+.soil-tips-section {
+  margin-top:    3rem;
+  background:    var(--bg-card);
+  border-radius: var(--r-lg);
+  padding:       2.25rem 2.5rem;
+  box-shadow:    var(--shadow-xs);
+  border:        1px solid var(--border);
+}
+.soil-tips-grid {
+  display:               grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:                   1.5rem;
+  margin-top:            1.5rem;
+}
+.soil-tip-card {
+  background:    var(--bg-input);          /* #f9fafb */
+  border:        1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding:       1.25rem;
+  transition:    border-color var(--transition-fast);
+}
+.soil-tip-card:hover { border-color: var(--sage) }
+.soil-tip-icon { font-size:1.6rem; margin-bottom:9px }
+.soil-tip-title {
+  font-size:     0.93rem;
+  font-weight:   700;
+  color:         var(--text-primary);      /* #1f2937 */
+  margin-bottom: 5px;
+}
+.soil-tip-body {
+  font-size:   0.82rem;
+  color:       var(--text-secondary);      /* #374151 */
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media(max-width:1024px) {
+  .soil-grid       { grid-template-columns:repeat(2,1fr) }
+  .soil-tips-grid  { grid-template-columns:repeat(2,1fr) }
+}
+@media(max-width:640px) {
+  .soil-grid       { grid-template-columns:1fr }
+  .soil-tips-grid  { grid-template-columns:1fr }
+  .soil-tips-section { padding:1.5rem }
+}

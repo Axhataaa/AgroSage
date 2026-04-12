@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgroSage — Crop & Soil Intelligence for Farmers</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<!-- Styles -->
+<link rel="stylesheet" href="/static/css/tokens.css">
+<link rel="stylesheet" href="/static/css/nav.css">
+<link rel="stylesheet" href="/static/css/hero.css">
+<link rel="stylesheet" href="/static/css/recommend.css">
+<link rel="stylesheet" href="/static/css/soil.css">
+<link rel="stylesheet" href="/static/css/browse.css">
+<link rel="stylesheet" href="/static/css/dashboard.css">
+<link rel="stylesheet" href="/static/css/insights.css">
+<link rel="stylesheet" href="/static/css/detect.css">
+<link rel="stylesheet" href="/static/css/footer.css">
+<link rel="stylesheet" href="/static/css/utilities.css">
+<link rel="stylesheet" href="/static/css/auth.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ NAV ══ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-icon">🌾</div>
+    Agro<span>Sage</span>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link active" onclick="showPage('home')">Home</a>
+    <a class="nav-link" onclick="showPage('recommend')">Crop Advisor</a>
+    <a class="nav-link" onclick="showPage('soil')">Soil Guide</a>
+    <a class="nav-link" onclick="showPage('browse')">Explore</a>
+    <a class="nav-link" onclick="showPage('dashboard')">Analytics</a>
+    <a class="nav-link" onclick="showPage('insights')">Insights</a>
+    <a class="nav-link" onclick="showPage('detect')">Disease Check</a>
+  </div>
+  <!-- Auth buttons — content injected by auth.js -->
+  <div class="nav-auth" id="navAuth"></div>
+</nav>
+
+<!-- ══════════════════════════════════════════════ HOME ══ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-canvas" id="heroCanvas"></div>
+
+    <div class="hero-content">
+      <!-- Badge -->
+      <div class="hero-badge">
+        🌾 AgroSage · AI Field Intelligence
+      </div>
+
+      <!-- Heading -->
+      <h1 class="hero-title">
+        Stop Guessing.<br><em>Grow What</em><br>Your Soil Wants.
+      </h1>
+
+      <!-- Description -->
+      <p class="hero-desc">
+        Most farmers lose yield not to bad weather — but to wrong crop choices. AgroSage matches your exact soil chemistry and microclimate to tell you what belongs in your ground, this season.
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="handleDetectCTA()">📍 Detect My Field</button>
+        <button class="btn-ghost"   onclick="showPage('browse')">Browse Crops →</button>
+      </div>
+
+      <!-- Process flow -->
+      <div class="hero-flow">
+        <div class="hero-flow-step">
+          <span class="hero-flow-step-icon">📍</span>
+          <div class="hero-flow-step-text">
+            <div class="hero-flow-step-label">Click</div>
+            <div class="hero-flow-step-sub">Share location</div>
+          </div>
+        </div>
+        <span class="hero-flow-arrow">›</span>
+        <div class="hero-flow-step">
+          <span class="hero-flow-step-icon">🤖</span>
+          <div class="hero-flow-step-text">
+            <div class="hero-flow-step-label">Analyse</div>
+            <div class="hero-flow-step-sub">Weather · Soil · Season</div>
+          </div>
+        </div>
+        <span class="hero-flow-arrow">›</span>
+        <div class="hero-flow-step">
+          <span class="hero-flow-step-icon">🌾</span>
+          <div class="hero-flow-step-text">
+            <div class="hero-flow-step-label">Result</div>
+            <div class="hero-flow-step-sub">Best crop + care plan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="hero-stats">
+      <div class="hero-stat" style="animation-delay:0.1s">
+        <div class="hero-stat-num">22+</div>
+        <div class="hero-stat-lbl">Crop Varieties</div>
+      </div>
+      <div class="hero-stat" style="animation-delay:0.2s">
+        <div class="hero-stat-num">94%</div>
+        <div class="hero-stat-lbl">Model Accuracy</div>
+      </div>
+      <div class="hero-stat" style="animation-delay:0.3s">
+        <div class="hero-stat-num">7</div>
+        <div class="hero-stat-lbl">Key Parameters</div>
+      </div>
+      <div class="hero-stat" style="animation-delay:0.4s">
+        <div class="hero-stat-num">38+</div>
+        <div class="hero-stat-lbl">Disease Classes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT AGROSAGE DOES ── -->
+  <!-- parchment: warm beige, first light section after the dark hero -->
+  <div style="background:var(--parchment);padding:5rem 2rem">
+    <div style="max-width:1280px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:3rem">
+        <div class="section-tag">What AgroSage Does</div>
+        <h2 class="section-title" style="text-align:center">Every tool a farmer needs, in one place</h2>
+        <p class="section-sub" style="max-width:560px;margin:0 auto">No jargon, no subscriptions. Enter your soil numbers and find out what to grow — then keep it healthy.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem">
+        <div class="soil-card" onclick="showPage('recommend')" style="cursor:pointer;transition:transform 0.2s,box-shadow 0.2s" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(28,56,41,0.1),rgba(90,138,106,0.15))">🌾</div>
+            <div><div class="soil-card-name">Crop Advisor</div><div class="soil-card-sym">Find your best match</div></div>
+          </div>
+          <div class="soil-ideal">Enter your N, P, K levels, pH, temperature, humidity, and rainfall. Get a ranked list of crops that suit your land — not a generic suggestion.</div>
+        </div>
+        <div class="soil-card" onclick="showPage('soil')" style="cursor:pointer;transition:transform 0.2s" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(139,94,60,0.1),rgba(201,146,58,0.15))">🧪</div>
+            <div><div class="soil-card-name">Soil Guide</div><div class="soil-card-sym">Know your soil</div></div>
+          </div>
+          <div class="soil-ideal">Learn what each soil parameter means, the ideal ranges for different crops, and practical steps to fix deficiencies before planting season.</div>
+        </div>
+        <div class="soil-card" onclick="showPage('dashboard')" style="cursor:pointer;transition:transform 0.2s" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(232,184,75,0.1),rgba(201,146,58,0.15))">📊</div>
+            <div><div class="soil-card-name">Analytics</div><div class="soil-card-sym">See the patterns</div></div>
+          </div>
+          <div class="soil-ideal">Visual charts showing how nitrogen, rainfall, and pH shift crop suitability. Useful for students, researchers, and farmers planning next season.</div>
+        </div>
+        <div class="soil-card" onclick="showPage('detect')" style="cursor:pointer;transition:transform 0.2s" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(192,57,43,0.08),rgba(192,57,43,0.04))">🔬</div>
+            <div><div class="soil-card-name">Disease Check</div><div class="soil-card-sym">Spot it before it spreads</div></div>
+          </div>
+          <div class="soil-ideal">Take a photo of a sick leaf and upload it. Our model — trained on 38 plant-disease classes — tells you what's wrong and how to treat it.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HOW IT WORKS ── -->
+  <!-- #e5dfd0: a touch deeper than parchment — enough contrast to read as a new section, still warm -->
+  <div style="background:#e5dfd0;padding:5rem 2rem">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:3.5rem">
+        <div class="section-tag">How It Works</div>
+        <h2 class="section-title" style="text-align:center">Three steps from question to answer</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem">
+        <div style="text-align:center;padding:2rem 1.5rem;background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(28,56,41,0.08)">
+          <div style="width:52px;height:52px;background:linear-gradient(135deg,var(--sage),var(--mint));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 1.25rem">📍</div>
+          <div style="font-size:0.68rem;letter-spacing:2px;color:var(--sage);font-weight:700;text-transform:uppercase;margin-bottom:0.4rem">Step 1</div>
+          <div style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--forest);margin-bottom:0.6rem">Enter your field data</div>
+          <div style="font-size:0.87rem;color:var(--text-muted);line-height:1.65">Share your soil readings — or use the location button to auto-fill weather data. Rough estimates still help.</div>
+        </div>
+        <div style="text-align:center;padding:2rem 1.5rem;background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(28,56,41,0.08)">
+          <div style="width:52px;height:52px;background:linear-gradient(135deg,var(--gold),var(--amber));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 1.25rem">🤖</div>
+          <div style="font-size:0.68rem;letter-spacing:2px;color:var(--amber);font-weight:700;text-transform:uppercase;margin-bottom:0.4rem">Step 2</div>
+          <div style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--forest);margin-bottom:0.6rem">The model runs</div>
+          <div style="font-size:0.87rem;color:var(--text-muted);line-height:1.65">A trained machine-learning model analyses your 7 parameters against 22 crop profiles and ranks matches by compatibility.</div>
+        </div>
+        <div style="text-align:center;padding:2rem 1.5rem;background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(28,56,41,0.08)">
+          <div style="width:52px;height:52px;background:linear-gradient(135deg,var(--moss),var(--sage));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 1.25rem">🌾</div>
+          <div style="font-size:0.68rem;letter-spacing:2px;color:var(--sage);font-weight:700;text-transform:uppercase;margin-bottom:0.4rem">Step 3</div>
+          <div style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--forest);margin-bottom:0.6rem">You get a clear answer</div>
+          <div style="font-size:0.87rem;color:var(--text-muted);line-height:1.65">See your top crop, its confidence score, ideal growing conditions, and a shortlist of alternatives — all on one screen.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WHO BENEFITS ── -->
+  <!-- cream: lightest, cleanest tone — feels like a breath of air after two beige sections -->
+  <div style="background:var(--cream);padding:5rem 2rem">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:3rem">
+        <div class="section-tag">Built For You</div>
+        <h2 class="section-title" style="text-align:center">Who uses AgroSage?</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem">
+        <div style="padding:2rem;background:#fff;border-radius:16px;box-shadow:0 2px 16px rgba(28,56,41,0.07)">
+          <div style="font-size:2.5rem;margin-bottom:1rem">👨‍🌾</div>
+          <div style="font-family:var(--ff-display);font-size:1.15rem;font-weight:700;color:var(--forest);margin-bottom:0.5rem">Farmers</div>
+          <div style="font-size:0.9rem;color:var(--text-muted);line-height:1.7">Get a second opinion on which crop suits your land this season. No agronomist visit needed — just enter your soil numbers and see what comes up.</div>
+        </div>
+        <div style="padding:2rem;background:#fff;border-radius:16px;box-shadow:0 2px 16px rgba(28,56,41,0.07)">
+          <div style="font-size:2.5rem;margin-bottom:1rem">🎓</div>
+          <div style="font-family:var(--ff-display);font-size:1.15rem;font-weight:700;color:var(--forest);margin-bottom:0.5rem">Students &amp; Researchers</div>
+          <div style="font-size:0.9rem;color:var(--text-muted);line-height:1.7">Study how soil composition and climate interact with crop outcomes. The analytics dashboard makes these relationships easy to explore and explain.</div>
+        </div>
+        <div style="padding:2rem;background:#fff;border-radius:16px;box-shadow:0 2px 16px rgba(28,56,41,0.07)">
+          <div style="font-size:2.5rem;margin-bottom:1rem">🏫</div>
+          <div style="font-family:var(--ff-display);font-size:1.15rem;font-weight:700;color:var(--forest);margin-bottom:0.5rem">Agri Educators</div>
+          <div style="font-size:0.9rem;color:var(--text-muted);line-height:1.7">Use AgroSage as a teaching tool to demonstrate N-P-K effects, pH sensitivity, and disease identification in a hands-on, interactive way.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FAQ / QUICK TIPS ── -->
+  <div style="background:var(--parchment);padding:5rem 2rem">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:3rem">
+        <div class="section-tag">Quick Answers</div>
+        <h2 class="section-title" style="text-align:center">Common questions before you start</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;max-width:860px;margin:0 auto">
+        <div style="padding:1.5rem;background:#fff;border-radius:12px;border-left:4px solid var(--sage)">
+          <div style="font-weight:700;color:var(--forest);margin-bottom:0.4rem;font-size:0.95rem">I don't have a soil test. Can I still use it?</div>
+          <div style="font-size:0.87rem;color:var(--text-muted);line-height:1.6">Yes. Use average values for your region as a starting point. The recommendations are still useful as a guide, even without lab-precise numbers.</div>
+        </div>
+        <div style="padding:1.5rem;background:#fff;border-radius:12px;border-left:4px solid var(--gold)">
+          <div style="font-weight:700;color:var(--forest);margin-bottom:0.4rem;font-size:0.95rem">How accurate is the crop recommendation?</div>
+          <div style="font-size:0.87rem;color:var(--text-muted);line-height:1.6">The model achieves ~94% accuracy on test data. Treat it as a well-informed suggestion — your local knowledge still matters.</div>
+        </div>
+        <div style="padding:1.5rem;background:#fff;border-radius:12px;border-left:4px solid var(--amber)">
+          <div style="font-weight:700;color:var(--forest);margin-bottom:0.4rem;font-size:0.95rem">Which crops does Disease Check support?</div>
+          <div style="font-size:0.87rem;color:var(--text-muted);line-height:1.6">It covers 12 plant families including tomato, potato, corn, grape, apple, and more — across 38 disease categories from the PlantVillage dataset.</div>
+        </div>
+        <div style="padding:1.5rem;background:#fff;border-radius:12px;border-left:4px solid var(--mint)">
+          <div style="font-weight:700;color:var(--forest);margin-bottom:0.4rem;font-size:0.95rem">Is this free to use?</div>
+          <div style="font-size:0.87rem;color:var(--text-muted);line-height:1.6">Completely free. No sign-up required to try the crop advisor — create an account only if you want to save your results.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONTACT ── -->
+  <div style="background:var(--forest);padding:5rem 2rem">
+    <div style="max-width:680px;margin:0 auto;text-align:center">
+      <div class="section-tag" style="color:rgba(140,197,160,0.7)">Get In Touch</div>
+      <h2 class="section-title" style="text-align:center;color:var(--cream)">Questions or feedback?</h2>
+      <p style="font-size:0.95rem;color:rgba(247,242,232,0.55);line-height:1.7;margin-bottom:2.5rem">Found a bug, have a feature idea, or want to discuss the model? Feedback from real users makes AgroSage better for everyone.</p>
+      <div style="display:flex;flex-direction:column;gap:1rem;max-width:480px;margin:0 auto">
+        <input type="text" placeholder="Your name" style="padding:0.85rem 1.25rem;border-radius:10px;border:1px solid rgba(140,197,160,0.2);background:rgba(255,255,255,0.06);color:var(--cream);font-size:0.95rem;outline:none;font-family:var(--ff-body)">
+        <input type="email" placeholder="Your email" style="padding:0.85rem 1.25rem;border-radius:10px;border:1px solid rgba(140,197,160,0.2);background:rgba(255,255,255,0.06);color:var(--cream);font-size:0.95rem;outline:none;font-family:var(--ff-body)">
+        <textarea placeholder="Your message" rows="4" style="padding:0.85rem 1.25rem;border-radius:10px;border:1px solid rgba(140,197,160,0.2);background:rgba(255,255,255,0.06);color:var(--cream);font-size:0.95rem;outline:none;font-family:var(--ff-body);resize:vertical"></textarea>
+        <button class="btn-primary" style="align-self:center;padding:0.85rem 2.5rem" onclick="alert('Thank you! This contact form is for demo purposes.')">Send Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ RECOMMEND ══ -->
+<div class="page" id="page-recommend" style="padding-top:68px">
+  <div class="section">
+    <div class="recommend-page-header">
+      <div class="section-tag">🌱 Main Feature</div>
+      <div id="currentSeasonPill" class="current-season-pill" style="display:none"></div>
+    </div>
+    <h2 class="section-title">Crop Recommendation System</h2>
+    <p class="section-sub">Enter your soil composition and local climate conditions. Our model analyses 7 key parameters to suggest the most suitable crop — and checks if it suits the <strong>current growing season</strong>.</p>
+
+    <div class="recommend-layout">
+      <!-- Input Form -->
+      <div>
+        <div class="form-card">
+          <div class="form-section-title">
+            <div class="form-section-icon">🌍</div>
+            Soil Nutrients
+          </div>
+          <div class="param-grid">
+            <div class="param-group">
+              <div class="param-label">Nitrogen <span class="param-unit">kg/ha</span></div>
+              <div class="param-input-wrap">
+                <input type="number" class="param-input" id="inp-N" value="60" min="0" max="150" oninput="syncSlider('N')">
+                <input type="range"  class="param-slider" id="sl-N" min="0" max="150" value="60" oninput="syncInput('N')">
+              </div>
+            </div>
+            <div class="param-group">
+              <div class="param-label">Phosphorus <span class="param-unit">kg/ha</span></div>
+              <div class="param-input-wrap">
+                <input type="number" class="param-input" id="inp-P" value="40" min="0" max="80" oninput="syncSlider('P')">
+                <input type="range"  class="param-slider" id="sl-P" min="0" max="80" value="40" oninput="syncInput('P')">
+              </div>
+            </div>
+            <div class="param-group">
+              <div class="param-label">Potassium <span class="param-unit">kg/ha</span></div>
+              <div class="param-input-wrap">
+                <input type="number" class="param-input" id="inp-K" value="40" min="0" max="120" oninput="syncSlider('K')">
+                <input type="range"  class="param-slider" id="sl-K" min="0" max="120" value="40" oninput="syncInput('K')">
+              </div>
+            </div>
+            <div class="param-group">
+              <div class="param-label">Soil pH</div>
+              <div class="param-input-wrap">
+                <input type="number" class="param-input" id="inp-pH" value="6.5" min="0" max="14" step="0.1" oninput="syncSlider('pH')">
+                <input type="range"  class="param-slider" id="sl-pH" min="0" max="14" step="0.1" value="6.5" oninput="syncInput('pH')">
+              </div>
+            </div>
+          </div>
+          <!-- Auto-fill disclaimer: shown after location detection -->
+          <div id="soilEstimateDisclaimer" class="soil-disclaimer" style="display:none"></div>
+        </div>
+
+        <div class="form-card" style="margin-top:1.5rem">
+          <div class="form-section-title">
+            <div class="form-section-icon">🌤️</div>
+            Climate Conditions
+            <button class="loc-btn" onclick="autoFillWeather()" title="Auto-fill from your location" style="margin-left:auto;padding:5px 12px;font-size:0.78rem;background:var(--accent);color:#fff;border-radius:6px;font-weight:600;display:flex;align-items:center;gap:5px;transition:background 0.2s" onmouseenter="this.style.background='var(--moss)'" onmouseleave="this.style.background='var(--accent)'">📍 Use My Location</button>
+          </div>
+          <div class="param-grid">
+            <div class="param-group">
+              <div class="param-label">Temperature <span class="param-unit">°C</span></div>
+              <input type="number" class="param-input" id="inp-T" value="25" min="0" max="50">
+              <input type="range"  class="param-slider" id="sl-T" min="0" max="50" value="25" oninput="document.getElementById('inp-T').value=this.value">
+            </div>
+            <div class="param-group">
+              <div class="param-label">Humidity <span class="param-unit">%</span></div>
+              <input type="number" class="param-input" id="inp-H" value="65" min="0" max="100">
+              <input type="range"  class="param-slider" id="sl-H" min="0" max="100" value="65" oninput="document.getElementById('inp-H').value=this.value">
+            </div>
+            <div class="param-group" style="grid-column:span 2">
+              <div class="param-label">Annual Rainfall <span class="param-unit">mm</span></div>
+              <input type="number" class="param-input" id="inp-R" value="120" min="0" max="300">
+              <input type="range"  class="param-slider" id="sl-R" min="0" max="300" value="120" oninput="document.getElementById('inp-R').value=this.value">
+            </div>
+          </div>
+          <button class="recommend-btn" onclick="runRecommendation()">
+            <span>🌾</span> Analyse &amp; Recommend Crop
+          </button>
+        </div>
+      </div>
+
+      <!-- Result Panel -->
+      <div>
+        <div class="result-panel" id="resultPanel">
+          <div class="result-empty" id="resultEmpty">
+            <div class="result-empty-icon">🌱</div>
+            <h3>Awaiting Field Data</h3>
+            <p>Enter your soil and climate parameters on the left, then click Analyse to receive your personalised crop recommendation.</p>
+          </div>
+          <div id="resultOutput" style="display:none">
+            <div class="result-header">
+              <div class="result-label">Top Recommendation</div>
+              <div class="result-crop-name" id="res-crop-name">—</div>
+              <div class="result-score-row">
+                <div class="score-pill">🎯 <span id="res-score">—</span>% match</div>
+                <div class="score-bar"><div class="score-bar-fill" id="res-bar" style="width:0%"></div></div>
+              </div>
+              <!-- Season timing badge: status set by recommend.js -->
+              <div id="res-season-badge" class="res-season-badge" style="display:none"></div>
+            </div>
+            <div class="result-body">
+              <div class="result-params-grid">
+                <div class="result-param">
+                  <div class="rp-icon">🌡️</div>
+                  <div class="rp-val" id="r-temp">—</div>
+                  <div class="rp-lbl">Ideal Temp</div>
+                </div>
+                <div class="result-param">
+                  <div class="rp-icon">💧</div>
+                  <div class="rp-val" id="r-rain">—</div>
+                  <div class="rp-lbl">Rainfall</div>
+                </div>
+                <div class="result-param">
+                  <div class="rp-icon">🧫</div>
+                  <div class="rp-val" id="r-ph">—</div>
+                  <div class="rp-lbl">Soil pH</div>
+                </div>
+              </div>
+              <div class="result-tip" id="res-tip">—</div>
+              <!-- Season awareness detail panel: populated by recommend.js -->
+              <div id="res-season-panel" class="season-aware-panel" style="display:none"></div>
+              <div class="result-alts" id="resAlts" style="display:none">
+                <div class="result-alts-title">Other Suitable Crops</div>
+                <div class="alt-chips" id="altChips"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Season card: crop's growing season info -->
+        <div id="seasonCard" class="season-card" style="display:none">
+          <div class="season-card-icon" id="seasonIcon">🌾</div>
+          <div>
+            <div class="season-card-eyebrow">Growing Season</div>
+            <div class="season-card-name" id="seasonName">—</div>
+            <div class="season-card-desc" id="seasonDesc">—</div>
+          </div>
+        </div>
+
+        <!-- Seasonal picks: what to plant this month (populated by recommend.js) -->
+        <div id="seasonalPicksCard" class="seasonal-picks-card" style="display:none">
+          <div class="sp-header">
+            <span id="sp-season-icon" class="sp-icon">🗓️</span>
+            <div>
+              <div class="sp-eyebrow">What to Sow This Month</div>
+              <div class="sp-title" id="sp-title">—</div>
+            </div>
+          </div>
+          <div class="sp-toggle">
+            <button class="sp-toggle-btn sp-toggle-now active" id="sp-btn-now" onclick="spSetTab('now')">
+              <span class="sp-legend-dot sp-chip-now"></span>Ideal now
+            </button>
+            <button class="sp-toggle-btn sp-toggle-soon" id="sp-btn-soon" onclick="spSetTab('soon')">
+              <span class="sp-legend-dot sp-chip-soon"></span>Good next month
+            </button>
+          </div>
+          <div class="sp-chips" id="sp-chips"></div>
+          <div class="sp-empty-msg" id="sp-empty-msg" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ SOIL ══ -->
+<div class="page" id="page-soil" style="padding-top:68px">
+  <div class="section soil-bg" style="max-width:100%;padding:5rem 2rem">
+    <div style="max-width:1280px;margin:0 auto">
+      <div class="section-tag">🧪 Parameter Guide</div>
+      <h2 class="section-title">Soil Analysis &amp; Parameter Guide</h2>
+      <p class="section-sub">Understanding your soil's nutrient profile is the foundation of successful farming. Here's what each parameter means and how it affects crop growth.</p>
+
+      <div class="soil-grid">
+
+        <div class="soil-card">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:rgba(56,142,60,0.12)">🟢</div>
+            <div><div class="soil-card-name">Nitrogen (N)</div><div class="soil-card-sym">Promotes Leaf Growth</div></div>
+          </div>
+          <div class="soil-range">
+            <div class="soil-range-label"><span>Low (0 kg/ha)</span><span>Ideal: 50–100</span><span>High (150 kg/ha)</span></div>
+            <div class="soil-range-bar">
+              <div class="soil-range-fill" style="left:33%;width:33%"></div>
+              <div class="soil-range-marker" style="left:50%"></div>
+            </div>
+          </div>
+          <div class="soil-ideal">Essential for chlorophyll synthesis and leaf development. <strong>Ideal: 50–100 kg/ha.</strong> Too low causes yellowing (chlorosis); too high promotes excessive vegetative growth and delays fruiting.</div>
+        </div>
+
+        <div class="soil-card">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:rgba(245,127,23,0.12)">🟠</div>
+            <div><div class="soil-card-name">Phosphorus (P)</div><div class="soil-card-sym">Root &amp; Fruit Development</div></div>
+          </div>
+          <div class="soil-range">
+            <div class="soil-range-label"><span>Low (0 kg/ha)</span><span>Ideal: 25–50</span><span>High (80 kg/ha)</span></div>
+            <div class="soil-range-bar">
+              <div class="soil-range-fill" style="left:31%;width:31%"></div>
+              <div class="soil-range-marker" style="left:47%"></div>
+            </div>
+          </div>
+          <div class="soil-ideal">Critical for root strength, seed formation, and energy transfer. <strong>Ideal: 25–50 kg/ha.</strong> Deficiency leads to dark purpling of leaves and severely stunted root systems.</div>
+        </div>
+
+        <div class="soil-card">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:rgba(123,31,162,0.1)">🟣</div>
+            <div><div class="soil-card-name">Potassium (K)</div><div class="soil-card-sym">Disease Resistance</div></div>
+          </div>
+          <div class="soil-range">
+            <div class="soil-range-label"><span>Low (0 kg/ha)</span><span>Ideal: 40–80</span><span>High (120 kg/ha)</span></div>
+            <div class="soil-range-bar">
+              <div class="soil-range-fill" style="left:33%;width:33%"></div>
+              <div class="soil-range-marker" style="left:50%"></div>
+            </div>
+          </div>
+          <div class="soil-ideal">Regulates water balance, stomatal function, and disease immunity. <strong>Ideal: 40–80 kg/ha.</strong> Deficiency causes leaf scorch at margins, weak stems, and poor grain fill.</div>
+        </div>
+
+        <div class="soil-card">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:rgba(201,146,58,0.12)">🟡</div>
+            <div><div class="soil-card-name">Soil pH</div><div class="soil-card-sym">Nutrient Availability</div></div>
+          </div>
+          <div class="soil-range">
+            <div class="soil-range-label"><span>Acidic (0)</span><span>Ideal: 6.0–7.5</span><span>Alkaline (14)</span></div>
+            <div class="soil-range-bar">
+              <div class="soil-range-fill" style="left:43%;width:11%"></div>
+              <div class="soil-range-marker" style="left:48%"></div>
+            </div>
+          </div>
+          <div class="soil-ideal">Controls nutrient solubility and microbial activity. <strong>Ideal: 6.0–7.5</strong> for most crops. Below 5.5 locks up phosphorus; above 7.5 reduces availability of iron, manganese, and zinc.</div>
+        </div>
+
+        <div class="soil-card">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:rgba(30,136,229,0.1)">🌡️</div>
+            <div><div class="soil-card-name">Temperature</div><div class="soil-card-sym">Growth Rate Regulator</div></div>
+          </div>
+          <div class="soil-range">
+            <div class="soil-range-label"><span>Low (0°C)</span><span>Ideal: 20–35°C</span><span>High (50°C)</span></div>
+            <div class="soil-range-bar">
+              <div class="soil-range-fill" style="left:40%;width:30%"></div>
+              <div class="soil-range-marker" style="left:55%"></div>
+            </div>
+          </div>
+          <div class="soil-ideal">Determines germination success and metabolic rate. <strong>Most crops prefer 20–35°C.</strong> Below 10°C slows germination; above 40°C causes heat stress and inhibits enzymatic activity.</div>
+        </div>
+
+        <div class="soil-card">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:rgba(2,136,209,0.1)">💧</div>
+            <div><div class="soil-card-name">Humidity &amp; Rainfall</div><div class="soil-card-sym">Water Stress Index</div></div>
+          </div>
+          <div class="soil-range">
+            <div class="soil-range-label"><span>Low (0%/mm)</span><span>Ideal: 50–80% / 50–200mm</span><span>High (100%/300mm)</span></div>
+            <div class="soil-range-bar">
+              <div class="soil-range-fill" style="left:50%;width:30%"></div>
+              <div class="soil-range-marker" style="left:65%"></div>
+            </div>
+          </div>
+          <div class="soil-ideal">Humidity of <strong>50–80%</strong> and annual rainfall of <strong>50–200 mm</strong> suits most field crops. Rice requires 150–300 mm; drought-tolerant crops like mustard and mothbeans thrive below 75 mm.</div>
+        </div>
+
+      </div>
+
+      <!-- Soil Improvement Tips -->
+      <div class="soil-tips-section">
+        <div class="form-section-title"><div class="form-section-icon">💡</div>Soil Improvement Tips</div>
+        <div class="soil-tips-grid">
+
+          <div class="soil-tip-card">
+            <div class="soil-tip-icon">🌿</div>
+            <div class="soil-tip-title">Nitrogen Deficiency</div>
+            <div class="soil-tip-body">
+              <strong>Cause:</strong> Low organic matter, excessive leaching, or sandy soils.<br>
+              <strong>Symptoms:</strong> Uniform yellowing (chlorosis) starting from older leaves; stunted growth and pale green foliage.<br>
+              <strong>Solution:</strong> Apply urea (46% N) or ammonium nitrate at 50–100 kg/ha. Grow leguminous cover crops (lentil, clover, chickpea) to fix atmospheric nitrogen naturally.
+            </div>
+          </div>
+
+          <div class="soil-tip-card">
+            <div class="soil-tip-icon">🧡</div>
+            <div class="soil-tip-title">Phosphorus Deficiency</div>
+            <div class="soil-tip-body">
+              <strong>Cause:</strong> Acidic soil (pH &lt; 5.5), low organic matter, or excessive soil moisture.<br>
+              <strong>Symptoms:</strong> Dark purple or reddish discolouration on leaf undersides; poor root development and delayed maturity.<br>
+              <strong>Solution:</strong> Apply single superphosphate (SSP) or DAP at 25–50 kg/ha. Raise soil pH above 5.5 to unlock phosphorus already present in the soil.
+            </div>
+          </div>
+
+          <div class="soil-tip-card">
+            <div class="soil-tip-icon">💦</div>
+            <div class="soil-tip-title">Potassium Deficiency</div>
+            <div class="soil-tip-body">
+              <strong>Cause:</strong> Sandy or heavily leached soils; over-irrigation or excessive rainfall.<br>
+              <strong>Symptoms:</strong> Scorch or brown burning at leaf margins and tips; weak stems prone to lodging; poor grain and fruit fill.<br>
+              <strong>Solution:</strong> Apply muriate of potash (MOP, 60% K₂O) or sulfate of potash at 30–60 kg/ha. Wood ash is a natural K source. Avoid over-irrigation which accelerates leaching.
+            </div>
+          </div>
+
+          <div class="soil-tip-card">
+            <div class="soil-tip-icon">🧂</div>
+            <div class="soil-tip-title">Alkaline Soil (High pH)</div>
+            <div class="soil-tip-body">
+              <strong>Cause:</strong> Calcareous parent material, irrigation with hard water, or excessive lime application.<br>
+              <strong>Symptoms:</strong> Iron and zinc chlorosis (interveinal yellowing on young leaves); reduced phosphorus and micronutrient uptake despite adequate fertilisation.<br>
+              <strong>Solution:</strong> Apply elemental sulfur (200–500 kg/ha) or acidifying fertilizers such as ammonium sulfate. Incorporate compost or peat moss to gradually lower pH toward 6.0–7.0.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ BROWSE ══ -->
+<div class="page" id="page-browse" style="padding-top:68px">
+  <div class="section">
+    <div class="section-tag">🌍 Explore</div>
+    <h2 class="section-title">Crop Collections</h2>
+    <p class="section-sub">Browse our curated library of crops. Filter by season, soil type or climate to find what suits your field.</p>
+
+    <div class="browse-filters" id="browseFilters">
+      <button class="filter-btn active" onclick="filterCrops('all',this)">All Crops</button>
+      <button class="filter-btn" onclick="filterCrops('kharif',this)">🌧️ Kharif</button>
+      <button class="filter-btn" onclick="filterCrops('rabi',this)">❄️ Rabi</button>
+      <button class="filter-btn" onclick="filterCrops('zaid',this)">☀️ Zaid</button>
+      <button class="filter-btn" onclick="filterCrops('cereal',this)">🌾 Cereals</button>
+      <button class="filter-btn" onclick="filterCrops('pulse',this)">🫘 Pulses</button>
+      <button class="filter-btn" onclick="filterCrops('fruit',this)">🍉 Fruits</button>
+    </div>
+
+    <div class="crop-grid" id="cropGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ DASHBOARD ══ -->
+<div class="page" id="page-dashboard" style="padding-top:68px">
+  <div class="dash-bg">
+    <div class="section">
+      <div class="section-tag">📊 Analytics</div>
+      <h2 class="section-title">Data Visualization Dashboard</h2>
+      <p class="section-sub">See how soil nutrients and climate conditions shift crop suitability. These charts make it easier to understand what your land actually needs.</p>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Crop Suitability by Nitrogen Level</div>
+          <canvas id="chartNitrogen" class="chart-canvas"></canvas>
+        </div>
+        <div class="param-influence">
+          <div class="pi-title">Parameter Influence Score</div>
+          <div id="piRows"></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem">
+        <div class="chart-card">
+          <div class="chart-title">Rainfall Requirements by Crop</div>
+          <canvas id="chartRainfall" class="chart-canvas"></canvas>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">pH Preference Distribution</div>
+          <canvas id="chartPH" class="chart-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ INSIGHTS ══ -->
+<div class="page" id="page-insights" style="padding-top:68px">
+  <div class="section">
+    <div class="section-tag">🌿 Farming Insights</div>
+    <h2 class="section-title">Things worth knowing</h2>
+    <p class="section-sub">Practical tips and observations to help you plan better across seasons, soil types, and weather conditions.</p>
+
+    <div class="insights-grid">
+      <div class="insight-card primary">
+        <div class="insight-icon">🌾</div>
+        <div class="insight-title">Rabi Season Alert</div>
+        <div class="insight-desc">Current temperatures (18–22°C) are ideal for wheat and mustard sowing. Ensure phosphorus levels are above 40 kg/ha before planting for maximum yield.</div>
+        <span class="insight-tag">Seasonal Tip</span>
+      </div>
+      <div class="insight-card sage-card">
+        <div class="insight-icon">💡</div>
+        <div class="insight-title">Soil pH Optimisation</div>
+        <div class="insight-desc">Fields with pH above 7.5 show 23% lower phosphorus availability. Apply 50–80kg/ha of sulfur amendment before the kharif season for best results.</div>
+        <span class="insight-tag">Soil Health</span>
+      </div>
+      <div class="insight-card amber-card">
+        <div class="insight-icon">🌧️</div>
+        <div class="insight-title">Rainfall Deficit Strategy</div>
+        <div class="insight-desc">In regions with &lt;100mm annual rainfall, consider drought-tolerant crops like millets, sorghum or chickpea. Drip irrigation can compensate for 40% deficit.</div>
+        <span class="insight-tag">Water Management</span>
+      </div>
+      <div class="insight-card mint-card">
+        <div class="insight-icon">🔬</div>
+        <div class="insight-title">N:P:K Ratio Insight</div>
+        <div class="insight-desc">Research shows a balanced 4:2:1 N:P:K ratio consistently outperforms imbalanced applications. Use leaf colour charts to diagnose deficiency before lab testing.</div>
+        <span class="insight-tag">Nutrient Science</span>
+      </div>
+      <div class="insight-card parchment-card">
+        <div class="insight-icon">🌡️</div>
+        <div class="insight-title">Temperature Stress Window</div>
+        <div class="insight-desc">Temperatures above 35°C during flowering reduce yield by up to 40% in wheat and 25% in maize. Plan sowing dates to avoid peak summer flowering.</div>
+        <span class="insight-tag">Climate Risk</span>
+      </div>
+      <div class="insight-card earth-card">
+        <div class="insight-icon">🌿</div>
+        <div class="insight-title">Organic Matter Benefit</div>
+        <div class="insight-desc">Every 1% increase in soil organic matter improves water retention by ~20,000 litres/hectare. Incorporate crop residue and compost for long-term fertility.</div>
+        <span class="insight-tag">Long-term Gain</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ DETECT ══ -->
+<div class="page" id="page-detect" style="padding-top:68px">
+  <div class="section">
+    <div class="section-tag">🔬 Secondary Feature</div>
+    <h2 class="section-title">Plant Disease Detection</h2>
+    <p class="section-sub">Upload a clear photograph of an affected plant leaf. Our AI model—trained on 38 disease classes—provides instant diagnosis with treatment guidance.</p>
+
+    <div class="detect-layout">
+      <!-- Upload Side -->
+      <div>
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="fileInput" accept=".jpg,.jpeg,.png" onchange="handleFile(event)">
+          <div class="upload-icon">📸</div>
+          <div class="upload-title">Upload Leaf Image</div>
+          <div class="upload-sub">Drag &amp; drop or click to browse<br>Supports JPG, JPEG, PNG · Max 16MB</div>
+          <div class="upload-btn" onclick="event.stopPropagation();document.getElementById('fileInput').click()">Choose File</div>
+        </div>
+
+        <div class="preview-wrap" id="previewWrap">
+          <img id="previewImg" class="preview-img" src="" alt="Preview">
+          <div class="preview-actions">
+            <button class="preview-clear" onclick="clearFile()">✕ Remove</button>
+          </div>
+        </div>
+
+        <button class="detect-btn" id="detectBtn" onclick="runDetection()" style="display:none">
+          🔍 Analyse Disease
+        </button>
+
+        <!-- Supported plant families -->
+        <div class="supported-plants-box">
+          <div class="supported-plants-label">Supported Plant Families</div>
+          <div class="supported-plants-chips">
+            <span class="alt-chip">🍎 Apple</span>
+            <span class="alt-chip">🍌 Banana</span>
+            <span class="alt-chip">🫐 Blueberry</span>
+            <span class="alt-chip">🍒 Cherry</span>
+            <span class="alt-chip">🌽 Corn</span>
+            <span class="alt-chip">🍇 Grape</span>
+            <span class="alt-chip">🍊 Orange</span>
+            <span class="alt-chip">🍑 Peach</span>
+            <span class="alt-chip">🫑 Pepper</span>
+            <span class="alt-chip">🥔 Potato</span>
+            <span class="alt-chip">🍓 Strawberry</span>
+            <span class="alt-chip">🍅 Tomato</span>
+            <span class="alt-chip">🫘 Soybean</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result Side -->
+      <div class="detect-result-panel" id="detectPanel">
+        <div class="detect-empty" id="detectEmpty">
+          <div class="detect-empty-icon">🌿</div>
+          <div class="detect-empty-title">Upload a Leaf Photo</div>
+          <div class="detect-empty-sub">Select a clear, well-lit image of a plant leaf. The AI will analyse disease patterns and return a diagnosis.</div>
+        </div>
+        <div class="detect-loading" id="detectLoading">
+          <div class="spinner-wrap"><div class="spinner-ring"></div></div>
+          <div class="detect-loading-title">Analysing Leaf Image…</div>
+          <div class="detect-loading-sub">Running AI model prediction</div>
+        </div>
+        <div class="detect-output" id="detectOutput">
+          <div class="detect-output-header">
+            <div>
+              <div class="disease-name" id="det-disease">—</div>
+              <div class="disease-plant" id="det-plant">—</div>
+            </div>
+            <div class="confidence-badge conf-high" id="det-conf">—</div>
+          </div>
+          <!-- Stub-mode notice: shown by JS when stub_mode=true -->
+          <p id="det-stub-notice" class="stub-notice">
+            ⚙️ Running in stub mode — TensorFlow model not loaded. Results are illustrative only. See README to train a real model.
+          </p>
+          <div class="detect-details">
+            <div class="detail-row">
+              <div class="detail-icon">🩺</div>
+              <div class="detail-content">
+                <div class="detail-label">Diagnosis</div>
+                <div class="detail-text" id="det-diagnosis">—</div>
+              </div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-icon">⚠️</div>
+              <div class="detail-content">
+                <div class="detail-label">Symptoms</div>
+                <div class="detail-text" id="det-symptoms">—</div>
+              </div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-icon">💊</div>
+              <div class="detail-content">
+                <div class="detail-label">Treatment</div>
+                <div class="detail-text" id="det-treatment">—</div>
+              </div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-icon">🛡️</div>
+              <div class="detail-content">
+                <div class="detail-label">Prevention</div>
+                <div class="detail-text" id="det-prevention">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top-5 predictions (populated by detect.js) -->
+          <div class="top5-section" id="det-top5-section" style="display:none">
+            <div class="top5-header">
+              <span class="top5-header-icon">📊</span>
+              <span>Top 5 Predictions</span>
+            </div>
+            <div id="det-top5-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ FOOTER ══ -->
+<footer id="footer" class="footer footer-full">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-icon">🌾</div>
+          AgroSage
+        </div>
+        <div class="footer-desc">AgroSage helps farmers and students make better planting decisions — using soil data, weather, and a machine-learning model trained on real crop profiles.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Features</div>
+        <div class="footer-links">
+          <span class="footer-link" onclick="showPage('recommend')">Crop Recommendation</span>
+          <span class="footer-link" onclick="showPage('soil')">Soil Analysis</span>
+          <span class="footer-link" onclick="showPage('dashboard')">Data Dashboard</span>
+          <span class="footer-link" onclick="showPage('detect')">Disease Detection</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Parameters</div>
+        <div class="footer-links">
+          <span class="footer-link">Nitrogen (N)</span>
+          <span class="footer-link">Phosphorus (P)</span>
+          <span class="footer-link">Potassium (K)</span>
+          <span class="footer-link">Soil pH</span>
+          <span class="footer-link">Temperature &amp; Humidity</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">About</div>
+        <div class="footer-links">
+          <span class="footer-link">Project Overview</span>
+          <span class="footer-link">Data Sources</span>
+          <span class="footer-link">Model Accuracy</span>
+          <span class="footer-link">PlantVillage Dataset</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 AgroSage · Agricultural Intelligence Platform</div>
+      <div class="footer-credit">
+        <span>🌿</span>
+        Developed by Akshata Lokhande
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="lo-ring"></div>
+  <div class="lo-text">Analysing Parameters…</div>
+  <div class="lo-sub">Running recommendation model</div>
+</div>
+
+
+
+<!-- ── JavaScript ── load order matters ── -->
+<!-- 1. API client (must be first — everything depends on it) -->
+<script src="/static/js/api.js"></script>
+<!-- 2. Static data -->
+<script src="/static/js/data/crops.js"></script>
+<script src="/static/js/data/diseases.js"></script>
+<!-- 3. Utilities -->
+<script src="/static/js/toast.js"></script>
+<script src="/static/js/nav.js"></script>
+<!-- 4. Auth (needs API) -->
+<script src="/static/js/auth.js"></script>
+<!-- 5. Features (need API + Auth + data) -->
+<script src="/static/js/hero.js"></script>
+<script src="/static/js/geolocation.js"></script>
+<script src="/static/js/sliders.js"></script>
+<script src="/static/js/recommend.js"></script>
+<script src="/static/js/browse.js"></script>
+<script src="/static/js/charts.js"></script>
+<script src="/static/js/detect.js"></script>
+<!-- 6. Boot -->
+<script src="/static/js/init.js"></script>
+
+<!-- Navigation and boot handled by nav.js + init.js -->
+
+</body>
+</html>

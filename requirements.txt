@@ -1,0 +1,45 @@
+# ── Web framework ─────────────────────────────────────────────
+flask>=3.0.0
+flask-cors>=4.0.0
+flask-jwt-extended>=4.6.0
+
+# ── Auth ──────────────────────────────────────────────────────
+bcrypt>=4.1.0
+
+# ── Database ──────────────────────────────────────────────────
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.9      # PostgreSQL (Render/Heroku); omit if SQLite-only
+
+# ── Configuration ─────────────────────────────────────────────
+python-dotenv>=1.0.0
+
+# ── ML stack (crop recommendation) ───────────────────────────
+scikit-learn>=1.3.0
+pandas>=2.0.0
+numpy>=1.24.0
+joblib>=1.3.0
+
+# ── Image processing ──────────────────────────────────────────
+Pillow>=10.0.0
+
+# ── Production server ─────────────────────────────────────────
+gunicorn>=21.2.0
+
+# ── Deep learning — disease detection ────────────────────────
+# Uncomment ONE of the following based on your hardware:
+
+# GPU (NVIDIA CUDA 11.8 / 12.x):
+# tensorflow>=2.14.0
+
+# CPU only (slower inference, no GPU required):
+# tensorflow-cpu>=2.14.0
+
+# Mac Apple Silicon (M1/M2/M3):
+# tensorflow-macos>=2.14.0
+# tensorflow-metal>=1.1.0     # optional Metal GPU acceleration
+
+# TF 2.14+ unified package (GPU+CPU auto-detect, recommended for new installs):
+# tensorflow[and-cuda]>=2.14.0
+
+# ── Dataset tooling (optional, for Kaggle downloads) ─────────
+# kaggle>=1.6.0    # pip install kaggle  then set ~/.kaggle/kaggle.json

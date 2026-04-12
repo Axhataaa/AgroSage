@@ -1,0 +1,68 @@
+/* ═══════════════════════════════════════════════
+   COLLECTION BROWSE
+═══════════════════════════════════════════════ */
+.browse-filters{
+  display:flex;gap:10px;flex-wrap:wrap;
+  margin:2rem 0;
+}
+.filter-btn{
+  padding:8px 18px;
+  border-radius:100px;
+  font-size:0.84rem;font-weight:500;
+  border:1.5px solid rgba(28,56,41,0.15);
+  color:var(--muted);
+  background:var(--white);
+  transition:var(--transition);
+}
+.filter-btn:hover,.filter-btn.active{
+  background:var(--forest);
+  border-color:var(--forest);
+  color:var(--cream);
+}
+.crop-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.5rem;
+}
+.crop-card{
+  background:var(--white);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  border:1px solid rgba(28,56,41,0.06);
+  transition:var(--transition);
+  cursor:pointer;
+}
+.crop-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.crop-thumb{
+  height:160px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:5rem;
+  position:relative;overflow:hidden;
+}
+.crop-card-body{padding:1.2rem}
+.crop-card-name{
+  font-family:var(--ff-display);
+  font-size:1.05rem;font-weight:700;color:var(--forest);
+  margin-bottom:4px;
+}
+.crop-card-season{
+  display:flex;align-items:center;gap:5px;
+  font-size:0.78rem;color:var(--muted);font-weight:500;
+  margin-bottom:10px;
+}
+.crop-card-tags{display:flex;gap:5px;flex-wrap:wrap}
+.crop-tag{
+  padding:3px 9px;
+  border-radius:4px;
+  font-size:0.72rem;font-weight:600;
+  letter-spacing:0.3px;
+}
+.tag-kharif{background:rgba(201,146,58,0.12);color:var(--amber)}
+.tag-rabi{background:rgba(28,56,41,0.08);color:var(--forest)}
+.tag-zaid{background:rgba(140,197,160,0.2);color:var(--moss)}
+.tag-soil{background:rgba(139,94,60,0.1);color:var(--earth)}
+.tag-climate{background:rgba(90,138,106,0.1);color:var(--sage)}
+
+@media(max-width:1024px){.crop-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.crop-grid{grid-template-columns:repeat(2,1fr)}}

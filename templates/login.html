@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log In — AgroSage</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="/static/css/tokens.css">
+<link rel="stylesheet" href="/static/css/auth.css">
+</head>
+<body>
+
+<div class="auth-page">
+
+  <!-- Minimal nav -->
+  <nav class="auth-nav">
+    <!-- FIX: Was href="index.html" → use Flask route '/' -->
+    <a class="auth-nav-logo" href="/">
+      <div class="auth-nav-logo-icon">🌾</div>
+      Agro<span>Sage</span>
+    </a>
+    <!-- FIX: Was href="index.html" → use Flask route '/' -->
+    <a class="auth-nav-back" href="/">← Back to home</a>
+  </nav>
+
+  <!-- Centered card -->
+  <div class="auth-center">
+    <div class="auth-card">
+
+      <div class="auth-card-eyebrow">🔐 Secure Sign-In</div>
+      <h1 class="auth-card-title">Welcome back</h1>
+      <p class="auth-card-sub">Log in to analyse your field, access saved recommendations and track your crops.</p>
+
+      <div class="auth-divider"></div>
+
+      <!-- Error message (shown by JS) -->
+      <div class="auth-error" id="loginError"></div>
+
+      <!-- Form -->
+      <form class="auth-form" id="loginForm" novalidate>
+
+        <div class="auth-field">
+          <label class="auth-label" for="loginEmail">Email address</label>
+          <div class="auth-input-wrap">
+            <span class="auth-input-icon">✉️</span>
+            <input
+              class="auth-input"
+              type="email"
+              id="loginEmail"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label" for="loginPassword">Password</label>
+          <div class="auth-input-wrap">
+            <span class="auth-input-icon">🔒</span>
+            <input
+              class="auth-input"
+              type="password"
+              id="loginPassword"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+            <button
+              type="button"
+              class="auth-toggle-pass"
+              id="toggleLoginPass"
+              aria-label="Toggle password visibility"
+            >Show</button>
+          </div>
+        </div>
+
+        <div class="auth-forgot">
+          <a>Forgot password?</a>
+        </div>
+
+        <button type="submit" class="auth-submit" id="loginBtn">
+          <span id="loginBtnText">Log In →</span>
+        </button>
+
+      </form>
+
+      <!-- Trust signals -->
+      <div class="auth-trust">
+        <div class="auth-trust-item">🔒 Encrypted</div>
+        <div class="auth-trust-item">🌿 Free forever</div>
+        <div class="auth-trust-item">📵 No spam</div>
+      </div>
+
+      <!-- Switch to signup -->
+      <div class="auth-switch">
+        <!-- FIX: Was href="signup.html" → use Flask route '/signup' -->
+        Don't have an account? <a href="/signup">Sign up free</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- JS — auth only, no chart or data deps needed -->
+<script src="/static/js/api.js"></script>
+<script src="/static/js/auth.js"></script>
+<script src="/static/js/login.js"></script>
+
+</body>
+</html>
