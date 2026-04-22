@@ -232,6 +232,6 @@ def create_app(config_class=Config) -> Flask:
 
 # ── Dev entry point ───────────────────────────────────────────
 if __name__ == "__main__":
-    application = create_app()
-    port        = int(os.getenv("PORT", 5000))
-    application.run(host="0.0.0.0", port=port, debug=Config.DEBUG)
+    app = create_app()
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
