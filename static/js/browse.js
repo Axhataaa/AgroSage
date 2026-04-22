@@ -28,13 +28,18 @@ function renderCropGrid(filter) {
 
     /* Clicking a crop card pre-fills the recommendation form */
     card.onclick = () => {
-      document.getElementById('inp-N').value  = Math.round((c.N[0]  + c.N[1])  / 2);
-      document.getElementById('inp-P').value  = Math.round((c.P[0]  + c.P[1])  / 2);
-      document.getElementById('inp-K').value  = Math.round((c.K[0]  + c.K[1])  / 2);
-      document.getElementById('inp-pH').value = ((c.pH[0] + c.pH[1]) / 2).toFixed(1);
-      document.getElementById('inp-T').value  = Math.round((c.T[0]  + c.T[1])  / 2);
-      document.getElementById('inp-H').value  = Math.round((c.H[0]  + c.H[1])  / 2);
-      document.getElementById('inp-R').value  = Math.round((c.R[0]  + c.R[1])  / 2);
+      const midVal = (arr) => Math.round((arr[0] + arr[1]) / 2);
+      const setAndSync = (id, val) => {
+        const inp = document.getElementById('inp-' + id);
+        if (inp) { inp.value = val; if (typeof syncSlider === 'function') syncSlider(id); }
+      };
+      setAndSync('N',  midVal(c.N));
+      setAndSync('P',  midVal(c.P));
+      setAndSync('K',  midVal(c.K));
+      setAndSync('pH', ((c.pH[0] + c.pH[1]) / 2).toFixed(1));
+      setAndSync('T',  midVal(c.T));
+      setAndSync('H',  midVal(c.H));
+      setAndSync('R',  midVal(c.R));
       showToast('🌾 Parameters set for ' + c.name);
       showPage('recommend');
     };

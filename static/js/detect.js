@@ -65,6 +65,10 @@ function clearFile() {
   uploadZone.classList.remove('drag-over');
 
   resetDetectPanel();
+
+  /* Remove post-detection bridge if present */
+  const bridge = document.getElementById('det-bridge');
+  if (bridge) bridge.remove();
 }
 
 function resetDetectPanel() {
@@ -115,8 +119,8 @@ function renderDetectResult(data) {
     if (data.stub_mode) stubNotice.classList.add('stub-notice');
   }
 
-  /* ── Top-5 predictions ── */
-  const top5Data    = data.top5 || [];
+  /* ── Top-3 predictions ── */
+  const top5Data    = (data.top5 || []).slice(0, 3);   // show only top 3
   const top5Section = document.getElementById('det-top5-section');
   const top5List    = document.getElementById('det-top5-list');
   if (top5Section && top5List) {
@@ -132,6 +136,13 @@ function renderDetectResult(data) {
         const barW    = Math.min(100, confVal);
         const cls     = confVal >= 70 ? 'conf-high' : confVal >= 40 ? 'conf-med' : 'conf-low';
 
+        /* Remedy: look up from DISEASE_DB, fall back to a short generic note */
+        const dbEntry = (typeof DISEASE_DB !== 'undefined') ? DISEASE_DB[lbl] : null;
+        const remedy  = dbEntry?.treatment
+          || (disease.toLowerCase().includes('healthy')
+              ? 'No treatment needed — plant appears healthy.'
+              : 'Consult an agronomist for specific treatment guidance.');
+
         const row = document.createElement('div');
         row.className = 'top5-item';
         row.innerHTML =
@@ -139,10 +150,11 @@ function renderDetectResult(data) {
           `<div class="top5-info">` +
             `<div class="top5-disease">${disease}</div>` +
             `<div class="top5-plant">${plant}</div>` +
+            `<div class="top5-bar" style="margin-top:5px"><div class="top5-bar-fill" style="width:${barW}%"></div></div>` +
+            `<div class="top5-remedy">💊 ${remedy}</div>` +
           `</div>` +
           `<div class="top5-right">` +
             `<span class="confidence-badge ${cls} top5-badge">${confVal}%</span>` +
-            `<div class="top5-bar"><div class="top5-bar-fill" style="width:${barW}%"></div></div>` +
           `</div>`;
         top5List.appendChild(row);
       });
@@ -175,9 +187,71 @@ async function runDetection() {
     renderDetectResult(data);
     const label = data.disease || data.label || 'Unknown';
     showToast('🔬 Detection complete: ' + label + ' (' + data.confidence + '%)');
+
+    /* ── Post-detection bridge: prompt toward Crop Advisor ── */
+    _renderPostDetectionBridge(data);
   } catch (err) {
     document.getElementById('detectLoading').style.display = 'none';
     document.getElementById('detectEmpty').style.display   = 'flex';
     showToast('❌ Detection failed: ' + (err.message || 'Server error. Please try again.'));
+  }
+}
+
+/* Render a subtle CTA below the result panel nudging to Crop Advisor */
+function _renderPostDetectionBridge(data) {
+  /* Remove any previous bridge */
+  const existing = document.getElementById('det-bridge');
+  if (existing) existing.remove();
+
+  /* Only show the bridge if there IS a detected disease (not healthy, not unknown) */
+  const isHealthy  = (data.disease || '').toLowerCase().includes('healthy');
+  const isUnknown  = (data.label  || '') === 'Unknown';
+  if (isHealthy || isUnknown) return;
+
+  const bridge = document.createElement('div');
+  bridge.id = 'det-bridge';
+  bridge.style.cssText = [
+    'margin-top:1.25rem',
+    'padding:1rem 1.25rem',
+    'background:linear-gradient(135deg,rgba(28,56,41,0.05),rgba(90,138,106,0.08))',
+    'border:1px solid rgba(28,56,41,0.12)',
+    'border-radius:12px',
+    'display:flex',
+    'align-items:center',
+    'gap:1rem',
+    'flex-wrap:wrap',
+  ].join(';');
+
+  bridge.innerHTML = `
+    <div style="flex:1;min-width:180px">
+      <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.5px;color:var(--sage);text-transform:uppercase;margin-bottom:3px">
+        🌱 Plan Next Season
+      </div>
+      <div style="font-size:0.875rem;color:var(--text-secondary);line-height:1.45">
+        Disease treated? Use the Crop Advisor to choose the <strong>best crop</strong> for your soil before replanting.
+      </div>
+    </div>
+    <button
+      onclick="showPage('recommend')"
+      style="
+        padding:9px 18px;
+        background:var(--accent);
+        color:#fff;
+        border-radius:8px;
+        font-size:0.84rem;
+        font-weight:700;
+        white-space:nowrap;
+        flex-shrink:0;
+        transition:background 0.2s;
+      "
+      onmouseenter="this.style.background='var(--moss)'"
+      onmouseleave="this.style.background='var(--accent)'"
+    >🌾 Open Crop Advisor →</button>
+  `;
+
+  /* Insert after the result panel (the parent .detect-result-panel's container) */
+  const detectPanel = document.getElementById('detectPanel');
+  if (detectPanel && detectPanel.parentNode) {
+    detectPanel.parentNode.insertBefore(bridge, detectPanel.nextSibling);
   }
 }

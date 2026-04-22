@@ -440,6 +440,12 @@
   margin-bottom:   0.15rem;
 }
 
+/* ── Constrain description text so it doesn't span the full container width ── */
+#page-recommend .section-sub {
+  max-width:   620px;
+  margin-bottom: 1.5rem;
+}
+
 /* ── Current season pill (e.g. "April · Zaid Season") ── */
 .current-season-pill {
   display:       inline-flex;
@@ -677,4 +683,208 @@
   color:       var(--text-muted);
   line-height: 1.55;
   padding:     0.5rem 0 0.25rem;
+}
+
+/* ═══════════════════════════════════════════════
+   INLINE WEATHER CARD  (inside Crop Advisor)
+   Two-column strip: search on left, results on right.
+   Compact — doesn't dwarf the form below it.
+═══════════════════════════════════════════════ */
+.weather-inline-card {
+  display:       flex;
+  align-items:   center;
+  gap:           1.5rem;
+  flex-wrap:     wrap;
+  background:    var(--bg-card);
+  border:        1px solid var(--border);
+  border-left:   4px solid var(--sage);
+  border-radius: var(--r-lg);
+  padding:       1rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow:    var(--shadow-xs);
+}
+
+/* Left column — title + search — always visible, fixed width */
+.wic-left {
+  display:        flex;
+  align-items:    center;
+  gap:            1rem;
+  flex-shrink:    0;
+  flex-wrap:      wrap;
+}
+.wic-label-group { display: flex; flex-direction: column; gap: 2px }
+.wic-title {
+  font-family: var(--ff-display);
+  font-size:   0.9rem;
+  font-weight: 700;
+  color:       var(--accent);
+  white-space: nowrap;
+}
+.wic-sub {
+  font-size:   0.75rem;
+  color:       var(--text-muted);
+  white-space: nowrap;
+}
+.wic-search-row { display: flex; gap: 7px; flex-shrink: 0 }
+.wic-input {
+  padding:     7px 12px;
+  border:      1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-size:   0.84rem;
+  font-family: var(--ff-body);
+  background:  var(--bg-input);
+  color:       var(--text-primary);
+  outline:     none;
+  width:       190px;
+  transition:  border-color var(--transition);
+}
+.wic-input:focus     { border-color: var(--border-focus) }
+.wic-search-btn {
+  padding:     7px 14px;
+  background:  var(--accent);
+  color:       #fff;
+  border-radius: var(--r-sm);
+  font-size:   0.84rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition:  background var(--transition);
+}
+.wic-search-btn:hover { background: var(--moss) }
+
+/* Right side — hidden until active, then flex row */
+.wic-right {
+  display:    flex;
+  align-items: center;
+  gap:         0.85rem;
+  flex-wrap:   wrap;
+  flex:        1;
+  min-width:   0;
+}
+
+.wic-loading {
+  display:     none;
+  align-items: center;
+  gap:         8px;
+  font-size:   0.82rem;
+  color:       var(--text-muted);
+}
+.wic-spinner {
+  width:  14px; height: 14px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+.wic-error {
+  display:     none;
+  align-items: center;
+  padding:     6px 12px;
+  background:  var(--danger-bg);
+  color:       var(--danger-text);
+  border-radius: var(--r-sm);
+  font-size:   0.8rem;
+  border:      1px solid rgba(220,38,38,0.15);
+  width:       100%;
+}
+
+/* Result: horizontal flex row */
+.wic-result {
+  display:     none;
+  align-items: center;
+  gap:         1rem;
+  flex-wrap:   wrap;
+  width:       100%;
+}
+
+/* Temp + location */
+.wic-metric-group {
+  display:     flex;
+  align-items: center;
+  gap:         8px;
+  flex-shrink: 0;
+}
+.wic-metric-group #wicIcon { font-size: 1.4rem; line-height: 1 }
+.wic-metric-group strong {
+  font-family: var(--ff-display);
+  font-size:   1.4rem;
+  font-weight: 700;
+  color:       var(--forest);
+  line-height: 1;
+}
+.wic-loc {
+  font-size:  0.7rem;
+  color:      var(--text-muted);
+  margin-top: 2px;
+  max-width:  90px;
+  white-space: nowrap;
+  overflow:   hidden;
+  text-overflow: ellipsis;
+}
+
+/* Humidity / Rainfall pills */
+.wic-pill {
+  display:     flex;
+  align-items: center;
+  gap:         6px;
+  padding:     5px 10px;
+  background:  var(--bg-subtle);
+  border:      1px solid var(--border);
+  border-radius: var(--r-sm);
+  flex-shrink: 0;
+}
+.wic-val { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); line-height:1 }
+.wic-lbl { font-size: 0.65rem; color: var(--text-muted); margin-top:1px }
+
+/* Thin divider */
+.wic-divider {
+  width: 1px; height: 32px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* Crop chips */
+.wic-crop-block { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0 }
+.wic-crops-label {
+  font-size:      0.63rem;
+  font-weight:    700;
+  letter-spacing: 0.8px;
+  color:          var(--text-muted);
+  text-transform: uppercase;
+}
+.wic-crop-chips { display: flex; gap: 5px; flex-wrap: wrap }
+.wic-chip {
+  padding:     3px 9px;
+  background:  rgba(28,56,41,0.07);
+  border:      1px solid rgba(28,56,41,0.12);
+  border-radius: 100px;
+  font-size:   0.75rem;
+  font-weight: 600;
+  color:       var(--accent);
+  white-space: nowrap;
+}
+
+/* Use values button */
+.wic-prefill-btn {
+  margin-left: auto;
+  padding:     7px 14px;
+  background:  var(--accent);
+  color:       #fff;
+  border-radius: var(--r-sm);
+  font-size:   0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition:  background var(--transition);
+}
+.wic-prefill-btn:hover { background: var(--moss) }
+
+@media (max-width: 900px) {
+  .weather-inline-card { flex-direction: column; align-items: flex-start }
+  .wic-input           { width: 100% }
+  .wic-search-row      { width: 100% }
+  .wic-divider         { display: none }
+  .wic-prefill-btn     { width: 100% }
 }

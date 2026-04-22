@@ -5,6 +5,17 @@
   height:1px;background:rgba(28,56,41,0.08);
   margin:0 2rem;
 }
+
+/* ── Page transition ── */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(10px) }
+  to   { opacity: 1; transform: translateY(0)    }
+}
+/* tokens.css already sets .page { display:none } and .page.active { display:block } */
+/* We override .page.active here to add the animation */
+.page.active {
+  animation: pageIn 0.28s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
 .toast{
   position:fixed;bottom:2rem;right:2rem;z-index:9999;
   background:var(--forest);color:var(--cream);

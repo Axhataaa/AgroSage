@@ -25,7 +25,8 @@ function showPage(id) {
     browse:    'Explore',
     dashboard: 'Analytics',
     insights:  'Insights',
-    detect:    'Disease Check'
+    detect:    'Disease Check',
+    weather:   'Weather',
   };
 
   document.querySelectorAll('.nav-link').forEach(link => {

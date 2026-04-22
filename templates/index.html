@@ -36,7 +36,6 @@
   <div class="nav-links">
     <a class="nav-link active" onclick="showPage('home')">Home</a>
     <a class="nav-link" onclick="showPage('recommend')">Crop Advisor</a>
-    <a class="nav-link" onclick="showPage('soil')">Soil Guide</a>
     <a class="nav-link" onclick="showPage('browse')">Explore</a>
     <a class="nav-link" onclick="showPage('dashboard')">Analytics</a>
     <a class="nav-link" onclick="showPage('insights')">Insights</a>
@@ -54,7 +53,7 @@
     <div class="hero-content">
       <!-- Badge -->
       <div class="hero-badge">
-        🌾 AgroSage · AI Field Intelligence
+        🌾 AgroSage · Before &amp; After Cultivation Intelligence
       </div>
 
       <!-- Heading -->
@@ -64,38 +63,38 @@
 
       <!-- Description -->
       <p class="hero-desc">
-        Most farmers lose yield not to bad weather — but to wrong crop choices. AgroSage matches your exact soil chemistry and microclimate to tell you what belongs in your ground, this season.
+        AgroSage works in two stages: <strong>before planting</strong>, it matches your soil and climate to the right crop. <strong>After planting</strong>, it diagnoses disease from a leaf photo — so you always know what to do next.
       </p>
 
       <!-- CTAs -->
       <div class="hero-actions">
-        <button class="btn-primary" onclick="handleDetectCTA()">📍 Detect My Field</button>
-        <button class="btn-ghost"   onclick="showPage('browse')">Browse Crops →</button>
+        <button class="btn-primary" onclick="handleDetectCTA()">🌾 Find My Best Crop</button>
+        <button class="btn-ghost"   onclick="showPage('detect')">🔬 Check for Disease →</button>
       </div>
 
-      <!-- Process flow -->
+      <!-- Two-stage process flow -->
       <div class="hero-flow">
+        <div class="hero-flow-step">
+          <span class="hero-flow-step-icon">🌱</span>
+          <div class="hero-flow-step-text">
+            <div class="hero-flow-step-label">Before Planting</div>
+            <div class="hero-flow-step-sub">Crop Recommendation</div>
+          </div>
+        </div>
+        <span class="hero-flow-arrow">›</span>
         <div class="hero-flow-step">
           <span class="hero-flow-step-icon">📍</span>
           <div class="hero-flow-step-text">
-            <div class="hero-flow-step-label">Click</div>
-            <div class="hero-flow-step-sub">Share location</div>
+            <div class="hero-flow-step-label">Grow</div>
+            <div class="hero-flow-step-sub">Season in progress</div>
           </div>
         </div>
         <span class="hero-flow-arrow">›</span>
         <div class="hero-flow-step">
-          <span class="hero-flow-step-icon">🤖</span>
+          <span class="hero-flow-step-icon">🔬</span>
           <div class="hero-flow-step-text">
-            <div class="hero-flow-step-label">Analyse</div>
-            <div class="hero-flow-step-sub">Weather · Soil · Season</div>
-          </div>
-        </div>
-        <span class="hero-flow-arrow">›</span>
-        <div class="hero-flow-step">
-          <span class="hero-flow-step-icon">🌾</span>
-          <div class="hero-flow-step-text">
-            <div class="hero-flow-step-label">Result</div>
-            <div class="hero-flow-step-sub">Best crop + care plan</div>
+            <div class="hero-flow-step-label">After Planting</div>
+            <div class="hero-flow-step-sub">Disease Detection</div>
           </div>
         </div>
       </div>
@@ -116,11 +115,49 @@
         <div class="hero-stat-lbl">Key Parameters</div>
       </div>
       <div class="hero-stat" style="animation-delay:0.4s">
-        <div class="hero-stat-num">38+</div>
-        <div class="hero-stat-lbl">Disease Classes</div>
+        <div class="hero-stat-num">Multi</div>
+        <div class="hero-stat-lbl">Disease Datasets</div>
       </div>
     </div>
   </section>
+
+  <!-- ── TWO-STAGE SYSTEM BANNER ── -->
+  <div style="background:var(--forest);padding:3.5rem 2rem">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:2rem">
+        <div class="section-tag" style="color:rgba(140,197,160,0.7)">How AgroSage Supports Farmers</div>
+        <h2 class="section-title" style="color:var(--cream);text-align:center;font-size:clamp(1.5rem,3vw,2.1rem)">A complete decision loop — before and after cultivation</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:center">
+        <!-- Stage 1 -->
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(140,197,160,0.18);border-radius:16px;padding:2rem;cursor:pointer;transition:background 0.2s" onclick="handleDetectCTA()" onmouseenter="this.style.background='rgba(140,197,160,0.1)'" onmouseleave="this.style.background='rgba(255,255,255,0.05)'">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--amber));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">🌱</div>
+            <div>
+              <div style="font-size:0.65rem;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase">Stage 1 · Before Cultivation</div>
+              <div style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--cream)">Crop Recommendation</div>
+            </div>
+          </div>
+          <div style="font-size:0.875rem;color:rgba(247,242,232,0.6);line-height:1.6">Enter your soil N, P, K, pH and climate data. The ML model ranks crops by compatibility with your exact field conditions.</div>
+          <div style="margin-top:1.1rem;font-size:0.8rem;font-weight:700;color:var(--gold)">Open Crop Advisor →</div>
+        </div>
+        <!-- Arrow -->
+        <div style="text-align:center;color:rgba(140,197,160,0.4);font-size:2rem">⇄</div>
+        <!-- Stage 2 -->
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(140,197,160,0.18);border-radius:16px;padding:2rem;cursor:pointer;transition:background 0.2s" onclick="showPage('detect')" onmouseenter="this.style.background='rgba(140,197,160,0.1)'" onmouseleave="this.style.background='rgba(255,255,255,0.05)'">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,rgba(192,57,43,0.7),rgba(192,57,43,0.4));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">🔬</div>
+            <div>
+              <div style="font-size:0.65rem;letter-spacing:2px;color:rgba(240,120,100,0.9);font-weight:700;text-transform:uppercase">Stage 2 · After Cultivation</div>
+              <div style="font-family:var(--ff-display);font-size:1.1rem;font-weight:700;color:var(--cream)">Disease Detection</div>
+            </div>
+          </div>
+          <div style="font-size:0.875rem;color:rgba(247,242,232,0.6);line-height:1.6">Upload a leaf photo. The CNN model — trained on multiple curated plant disease datasets — diagnoses the problem and recommends treatment in seconds.</div>
+          <div style="margin-top:1.1rem;font-size:0.8rem;font-weight:700;color:rgba(240,120,100,0.9)">Check Plant Health →</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ── WHAT AGROSAGE DOES ── -->
   <!-- parchment: warm beige, first light section after the dark hero -->
@@ -131,34 +168,41 @@
         <h2 class="section-title" style="text-align:center">Every tool a farmer needs, in one place</h2>
         <p class="section-sub" style="max-width:560px;margin:0 auto">No jargon, no subscriptions. Enter your soil numbers and find out what to grow — then keep it healthy.</p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem">
         <div class="soil-card" onclick="showPage('recommend')" style="cursor:pointer;transition:transform 0.2s,box-shadow 0.2s" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
           <div class="soil-card-header">
             <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(28,56,41,0.1),rgba(90,138,106,0.15))">🌾</div>
             <div><div class="soil-card-name">Crop Advisor</div><div class="soil-card-sym">Find your best match</div></div>
           </div>
-          <div class="soil-ideal">Enter your N, P, K levels, pH, temperature, humidity, and rainfall. Get a ranked list of crops that suit your land — not a generic suggestion.</div>
+          <div class="soil-ideal">Enter N, P, K, pH, temperature, humidity, and rainfall. Get a ranked crop recommendation matched to your exact field.</div>
         </div>
-        <div class="soil-card" onclick="showPage('soil')" style="cursor:pointer;transition:transform 0.2s" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
+        <div class="soil-card" onclick="showPage('browse')" style="cursor:pointer;transition:transform 0.2s" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
           <div class="soil-card-header">
-            <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(139,94,60,0.1),rgba(201,146,58,0.15))">🧪</div>
-            <div><div class="soil-card-name">Soil Guide</div><div class="soil-card-sym">Know your soil</div></div>
+            <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(90,138,106,0.12),rgba(140,197,160,0.18))">🌿</div>
+            <div><div class="soil-card-name">Explore Crops</div><div class="soil-card-sym">Browse &amp; pre-fill</div></div>
           </div>
-          <div class="soil-ideal">Learn what each soil parameter means, the ideal ranges for different crops, and practical steps to fix deficiencies before planting season.</div>
+          <div class="soil-ideal">Browse all 22 crops by season, type or climate. Click any card to instantly pre-fill the Crop Advisor with that crop's ideal parameters.</div>
+        </div>
+        <div class="soil-card" onclick="showPage('recommend')" style="cursor:pointer;transition:transform 0.2s" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
+          <div class="soil-card-header">
+            <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(30,100,200,0.08),rgba(90,138,180,0.14))">🌤️</div>
+            <div><div class="soil-card-name">Weather Insight</div><div class="soil-card-sym">Real-time climate data</div></div>
+          </div>
+          <div class="soil-ideal">Search any city for live temperature, humidity &amp; rainfall. One click fills the climate fields in Crop Advisor and suggests matching crops.</div>
         </div>
         <div class="soil-card" onclick="showPage('dashboard')" style="cursor:pointer;transition:transform 0.2s" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
           <div class="soil-card-header">
-            <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(232,184,75,0.1),rgba(201,146,58,0.15))">📊</div>
+            <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(232,184,75,0.12),rgba(201,146,58,0.16))">📊</div>
             <div><div class="soil-card-name">Analytics</div><div class="soil-card-sym">See the patterns</div></div>
           </div>
-          <div class="soil-ideal">Visual charts showing how nitrogen, rainfall, and pH shift crop suitability. Useful for students, researchers, and farmers planning next season.</div>
+          <div class="soil-ideal">Charts showing N, pH, and rainfall ranges by crop — plus which parameters matter most to the ML model's decisions.</div>
         </div>
         <div class="soil-card" onclick="showPage('detect')" style="cursor:pointer;transition:transform 0.2s" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform=''">
           <div class="soil-card-header">
             <div class="soil-icon-wrap" style="background:linear-gradient(135deg,rgba(192,57,43,0.08),rgba(192,57,43,0.04))">🔬</div>
             <div><div class="soil-card-name">Disease Check</div><div class="soil-card-sym">Spot it before it spreads</div></div>
           </div>
-          <div class="soil-ideal">Take a photo of a sick leaf and upload it. Our model — trained on 38 plant-disease classes — tells you what's wrong and how to treat it.</div>
+          <div class="soil-ideal">Upload a leaf photo. The CNN model — trained on a combination of plant disease datasets — diagnoses what's wrong and gives treatment guidance.</div>
         </div>
       </div>
     </div>
@@ -241,7 +285,7 @@
         </div>
         <div style="padding:1.5rem;background:#fff;border-radius:12px;border-left:4px solid var(--amber)">
           <div style="font-weight:700;color:var(--forest);margin-bottom:0.4rem;font-size:0.95rem">Which crops does Disease Check support?</div>
-          <div style="font-size:0.87rem;color:var(--text-muted);line-height:1.6">It covers 12 plant families including tomato, potato, corn, grape, apple, and more — across 38 disease categories from the PlantVillage dataset.</div>
+          <div style="font-size:0.87rem;color:var(--text-muted);line-height:1.6">It covers multiple plant families — including tomato, potato, corn, grape, apple, and more — trained across disease categories sourced from several agricultural datasets.</div>
         </div>
         <div style="padding:1.5rem;background:#fff;border-radius:12px;border-left:4px solid var(--mint)">
           <div style="font-weight:700;color:var(--forest);margin-bottom:0.4rem;font-size:0.95rem">Is this free to use?</div>
@@ -251,17 +295,35 @@
     </div>
   </div>
 
-  <!-- ── CONTACT ── -->
+  <!-- ── ABOUT THE PROJECT ── -->
   <div style="background:var(--forest);padding:5rem 2rem">
-    <div style="max-width:680px;margin:0 auto;text-align:center">
-      <div class="section-tag" style="color:rgba(140,197,160,0.7)">Get In Touch</div>
-      <h2 class="section-title" style="text-align:center;color:var(--cream)">Questions or feedback?</h2>
-      <p style="font-size:0.95rem;color:rgba(247,242,232,0.55);line-height:1.7;margin-bottom:2.5rem">Found a bug, have a feature idea, or want to discuss the model? Feedback from real users makes AgroSage better for everyone.</p>
-      <div style="display:flex;flex-direction:column;gap:1rem;max-width:480px;margin:0 auto">
-        <input type="text" placeholder="Your name" style="padding:0.85rem 1.25rem;border-radius:10px;border:1px solid rgba(140,197,160,0.2);background:rgba(255,255,255,0.06);color:var(--cream);font-size:0.95rem;outline:none;font-family:var(--ff-body)">
-        <input type="email" placeholder="Your email" style="padding:0.85rem 1.25rem;border-radius:10px;border:1px solid rgba(140,197,160,0.2);background:rgba(255,255,255,0.06);color:var(--cream);font-size:0.95rem;outline:none;font-family:var(--ff-body)">
-        <textarea placeholder="Your message" rows="4" style="padding:0.85rem 1.25rem;border-radius:10px;border:1px solid rgba(140,197,160,0.2);background:rgba(255,255,255,0.06);color:var(--cream);font-size:0.95rem;outline:none;font-family:var(--ff-body);resize:vertical"></textarea>
-        <button class="btn-primary" style="align-self:center;padding:0.85rem 2.5rem" onclick="alert('Thank you! This contact form is for demo purposes.')">Send Message</button>
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:3rem">
+        <div class="section-tag" style="color:rgba(140,197,160,0.7)">About This Project</div>
+        <h2 class="section-title" style="text-align:center;color:var(--cream)">Built with real data, for real decisions</h2>
+        <p style="font-size:0.95rem;color:rgba(247,242,232,0.55);line-height:1.75;max-width:580px;margin:0 auto">AgroSage is a machine-learning web application designed to help farmers and students make better agricultural decisions — using soil science, live weather, and computer vision.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(140,197,160,0.15);border-radius:16px;padding:1.75rem">
+          <div style="font-size:1.8rem;margin-bottom:0.75rem">🌾</div>
+          <div style="font-family:var(--ff-display);font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:0.5rem">Crop Recommendation Model</div>
+          <div style="font-size:0.84rem;color:rgba(247,242,232,0.55);line-height:1.65">Random Forest classifier trained on the Crop Recommendation Dataset. Analyses 7 parameters (N, P, K, pH, temperature, humidity, rainfall) across 22 crop classes. Test accuracy: <strong style="color:var(--mint)">~94%</strong>.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(140,197,160,0.15);border-radius:16px;padding:1.75rem">
+          <div style="font-size:1.8rem;margin-bottom:0.75rem">🔬</div>
+          <div style="font-family:var(--ff-display);font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:0.5rem">Disease Detection Model</div>
+          <div style="font-size:0.84rem;color:rgba(247,242,232,0.55);line-height:1.65">CNN (MobileNetV2 transfer learning) trained on a <strong style="color:var(--mint)">combination of multiple agricultural image datasets</strong>. Classifies disease and healthy states across several plant families from a single leaf photograph.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(140,197,160,0.15);border-radius:16px;padding:1.75rem">
+          <div style="font-size:1.8rem;margin-bottom:0.75rem">🌤️</div>
+          <div style="font-family:var(--ff-display);font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:0.5rem">Live Weather Integration</div>
+          <div style="font-size:0.84rem;color:rgba(247,242,232,0.55);line-height:1.65">Powered by <strong style="color:var(--mint)">Open-Meteo API</strong> — free, no API key required. Fetches real-time temperature, humidity, and rainfall for any city worldwide via geocoding.</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(140,197,160,0.12);padding-top:2rem;text-align:center">
+        <div style="font-size:0.84rem;color:rgba(247,242,232,0.4)">
+          Stack: Python · Flask · TensorFlow · Scikit-learn · SQLite · Vanilla JS
+        </div>
       </div>
     </div>
   </div>
@@ -275,7 +337,42 @@
       <div id="currentSeasonPill" class="current-season-pill" style="display:none"></div>
     </div>
     <h2 class="section-title">Crop Recommendation System</h2>
-    <p class="section-sub">Enter your soil composition and local climate conditions. Our model analyses 7 key parameters to suggest the most suitable crop — and checks if it suits the <strong>current growing season</strong>.</p>
+    <p class="section-sub">Enter your soil nutrients and local climate values. The model analyses 7 parameters — N, P, K, pH, temperature, humidity, and rainfall — to rank the most compatible crops for your field, along with a <strong>current season check</strong>.</p>
+
+    <!-- ── Inline Weather Helper ── -->
+    <div class="weather-inline-card">
+      <div class="wic-left">
+        <div class="wic-label-group">
+          <div class="wic-title">🌤️ Live Weather</div>
+          <div class="wic-sub">Search a city to auto-fill climate fields</div>
+        </div>
+        <div class="wic-search-row">
+          <input class="wic-input" id="wicCityInput" type="text" placeholder="e.g. Bhopal, Pune, Delhi…">
+          <button class="wic-search-btn" id="wicSearchBtn" onclick="searchWeatherInline()">Search</button>
+        </div>
+      </div>
+      <div class="wic-right">
+        <div class="wic-loading" id="wicLoading"><span class="wic-spinner"></span> Fetching…</div>
+        <div class="wic-error" id="wicError"><span id="wicErrorMsg"></span></div>
+        <div class="wic-result" id="wicResult">
+          <div class="wic-metric-group">
+            <span id="wicIcon">🌤️</span>
+            <div>
+              <strong id="wicTemp">—</strong>
+              <div class="wic-loc" id="wicLocationName">—</div>
+            </div>
+          </div>
+          <div class="wic-pill"><span>💧</span><div><div class="wic-val" id="wicHumidity">—</div><div class="wic-lbl">Humidity</div></div></div>
+          <div class="wic-pill"><span>🌧️</span><div><div class="wic-val" id="wicRainfall">—</div><div class="wic-lbl">Annual Rain</div></div></div>
+          <div class="wic-divider"></div>
+          <div class="wic-crop-block">
+            <div class="wic-crops-label">Suited crops</div>
+            <div id="wicCropChips" class="wic-crop-chips"></div>
+          </div>
+          <button class="wic-prefill-btn" onclick="prefillFromInlineWeather()">🌾 Use Values</button>
+        </div>
+      </div>
+    </div>
 
     <div class="recommend-layout">
       <!-- Input Form -->
@@ -589,7 +686,7 @@
   <div class="section">
     <div class="section-tag">🌍 Explore</div>
     <h2 class="section-title">Crop Collections</h2>
-    <p class="section-sub">Browse our curated library of crops. Filter by season, soil type or climate to find what suits your field.</p>
+    <p class="section-sub">Browse all 22 crops in the model's dataset. Filter by season or type — then <strong>click any card</strong> to instantly pre-fill the Crop Advisor with that crop's ideal soil and climate parameters.</p>
 
     <div class="browse-filters" id="browseFilters">
       <button class="filter-btn active" onclick="filterCrops('all',this)">All Crops</button>
@@ -601,6 +698,18 @@
       <button class="filter-btn" onclick="filterCrops('fruit',this)">🍉 Fruits</button>
     </div>
 
+    <!-- Soil Guide tip -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;background:#fff;border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:12px;padding:0.9rem 1.25rem;margin-bottom:2rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:1.2rem">🧪</span>
+        <div>
+          <div style="font-size:0.84rem;font-weight:700;color:var(--forest)">Not sure what your soil parameters mean?</div>
+          <div style="font-size:0.78rem;color:var(--text-muted)">The Soil Guide explains N, P, K, pH and how to improve them before planting.</div>
+        </div>
+      </div>
+      <button onclick="showPage('soil')" style="padding:6px 16px;background:var(--amber);color:#fff;border-radius:8px;font-size:0.82rem;font-weight:700;white-space:nowrap;transition:background 0.2s" onmouseenter="this.style.background='var(--earth)'" onmouseleave="this.style.background='var(--amber)'">Open Soil Guide →</button>
+    </div>
+
     <div class="crop-grid" id="cropGrid"></div>
   </div>
 </div>
@@ -610,12 +719,12 @@
   <div class="dash-bg">
     <div class="section">
       <div class="section-tag">📊 Analytics</div>
-      <h2 class="section-title">Data Visualization Dashboard</h2>
-      <p class="section-sub">See how soil nutrients and climate conditions shift crop suitability. These charts make it easier to understand what your land actually needs.</p>
+      <h2 class="section-title">Crop Data Dashboard</h2>
+      <p class="section-sub">Understand the numbers behind the ML model's decisions — which parameters matter most, and how nitrogen, rainfall, and pH vary across the 22 supported crops.</p>
 
       <div class="charts-grid">
         <div class="chart-card">
-          <div class="chart-title">Crop Suitability by Nitrogen Level</div>
+          <div class="chart-title">Nitrogen Requirements by Crop</div>
           <canvas id="chartNitrogen" class="chart-canvas"></canvas>
         </div>
         <div class="param-influence">
@@ -634,6 +743,28 @@
           <canvas id="chartPH" class="chart-canvas"></canvas>
         </div>
       </div>
+
+      <!-- ── Key Insights from the data ── -->
+      <div style="margin-top:2.5rem">
+        <div style="font-size:0.72rem;letter-spacing:1.5px;color:var(--mint);font-weight:700;text-transform:uppercase;margin-bottom:1.25rem">🔍 Key Insights from This Data</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem">
+          <div style="background:rgba(232,184,75,0.08);border:1px solid rgba(232,184,75,0.2);border-radius:14px;padding:1.25rem">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem">🌱</div>
+            <div style="font-family:var(--ff-display);font-size:0.95rem;font-weight:700;color:var(--gold);margin-bottom:0.4rem">Soil pH is the top predictor</div>
+            <div style="font-size:0.82rem;color:rgba(247,242,232,0.55);line-height:1.55">pH carries the highest feature importance in the trained model — a field with pH above 7.5 or below 5.5 will significantly limit viable crop options regardless of nutrients.</div>
+          </div>
+          <div style="background:rgba(140,197,160,0.07);border:1px solid rgba(140,197,160,0.18);border-radius:14px;padding:1.25rem">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem">💧</div>
+            <div style="font-family:var(--ff-display);font-size:0.95rem;font-weight:700;color:var(--mint);margin-bottom:0.4rem">Rice needs 3× more rainfall than wheat</div>
+            <div style="font-size:0.82rem;color:rgba(247,242,232,0.55);line-height:1.55">Rice averages 225 mm/yr vs. wheat's 75 mm/yr. Choosing between them based on local rainfall alone can double or halve irrigation costs in a season.</div>
+          </div>
+          <div style="background:rgba(201,146,58,0.08);border:1px solid rgba(201,146,58,0.2);border-radius:14px;padding:1.25rem">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem">🌡️</div>
+            <div style="font-family:var(--ff-display);font-size:0.95rem;font-weight:700;color:var(--amber);margin-bottom:0.4rem">Temperature splits two clear crop groups</div>
+            <div style="font-size:0.82rem;color:rgba(247,242,232,0.55);line-height:1.55">Crops cluster into cool-season (10–25°C: wheat, mustard, chickpea) and warm-season (22–38°C: rice, cotton, mango). Matching your month's temperature to the right group is the first filter to apply.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -647,9 +778,9 @@
 
     <div class="insights-grid">
       <div class="insight-card primary">
-        <div class="insight-icon">🌾</div>
-        <div class="insight-title">Rabi Season Alert</div>
-        <div class="insight-desc">Current temperatures (18–22°C) are ideal for wheat and mustard sowing. Ensure phosphorus levels are above 40 kg/ha before planting for maximum yield.</div>
+        <div class="insight-icon" id="insightSeasonIcon">🌾</div>
+        <div class="insight-title" id="insightSeasonTitle">Loading Season…</div>
+        <div class="insight-desc"  id="insightSeasonDesc">Detecting current agricultural season…</div>
         <span class="insight-tag">Seasonal Tip</span>
       </div>
       <div class="insight-card sage-card">
@@ -791,11 +922,11 @@
             </div>
           </div>
 
-          <!-- Top-5 predictions (populated by detect.js) -->
+          <!-- Top-3 predictions (populated by detect.js) -->
           <div class="top5-section" id="det-top5-section" style="display:none">
             <div class="top5-header">
               <span class="top5-header-icon">📊</span>
-              <span>Top 5 Predictions</span>
+              <span>Top 3 Predictions &amp; Remedies</span>
             </div>
             <div id="det-top5-list"></div>
           </div>
@@ -820,9 +951,10 @@
         <div class="footer-col-title">Features</div>
         <div class="footer-links">
           <span class="footer-link" onclick="showPage('recommend')">Crop Recommendation</span>
-          <span class="footer-link" onclick="showPage('soil')">Soil Analysis</span>
-          <span class="footer-link" onclick="showPage('dashboard')">Data Dashboard</span>
+          <span class="footer-link" onclick="showPage('browse')">Explore Crops</span>
+          <span class="footer-link" onclick="showPage('dashboard')">Analytics</span>
           <span class="footer-link" onclick="showPage('detect')">Disease Detection</span>
+          <span class="footer-link" onclick="showPage('insights')">Farming Insights</span>
         </div>
       </div>
       <div>
@@ -841,7 +973,7 @@
           <span class="footer-link">Project Overview</span>
           <span class="footer-link">Data Sources</span>
           <span class="footer-link">Model Accuracy</span>
-          <span class="footer-link">PlantVillage Dataset</span>
+          <span class="footer-link">Disease Datasets</span>
         </div>
       </div>
     </div>
@@ -886,6 +1018,8 @@
 <script src="/static/js/browse.js"></script>
 <script src="/static/js/charts.js"></script>
 <script src="/static/js/detect.js"></script>
+<!-- Weather widget (must load after nav.js + toast.js) -->
+<script src="/static/js/weather.js"></script>
 <!-- 6. Boot -->
 <script src="/static/js/init.js"></script>
 

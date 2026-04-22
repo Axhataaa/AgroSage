@@ -342,7 +342,7 @@
 @media(max-width:1024px) { .detect-layout { grid-template-columns:1fr } }
 
 /* ════════════════════════════════════════════
-   TOP-5 PREDICTIONS PANEL
+   TOP-3 PREDICTIONS PANEL
 ════════════════════════════════════════════ */
 
 .top5-section {
@@ -365,9 +365,9 @@
 .top5-item {
   display:       grid;
   grid-template-columns: 24px 1fr auto;
-  align-items:   center;
+  align-items:   start;
   gap:           0.65rem;
-  padding:       0.55rem 0;
+  padding:       0.75rem 0;
   border-bottom: 1px solid var(--border);
 }
 .top5-item:last-child { border-bottom: none }
@@ -378,6 +378,7 @@
   font-weight:  700;
   color:        var(--text-muted);
   text-align:   center;
+  padding-top:  2px;
 }
 .top5-info   { min-width: 0 }
 .top5-disease {
@@ -393,17 +394,44 @@
   color:        var(--text-muted);
   margin-top:   1px;
 }
+/* Confidence bar lives inside .top5-info now */
+.top5-info .top5-bar {
+  width:        100%;
+  height:       4px;
+  background:   var(--border);
+  border-radius: 100px;
+  overflow:     hidden;
+  margin-top:   6px;
+}
+.top5-info .top5-bar-fill {
+  height:       100%;
+  background:   var(--accent);
+  border-radius: 100px;
+  transition:   width 0.4s ease;
+}
+/* Remedy text under the bar */
+.top5-remedy {
+  font-size:    0.76rem;
+  color:        var(--text-secondary);
+  line-height:  1.45;
+  margin-top:   5px;
+  padding-top:  5px;
+  border-top:   1px dashed var(--border);
+}
+
 .top5-right {
   display:      flex;
   flex-direction: column;
   align-items:  flex-end;
   gap:          4px;
-  min-width:    70px;
+  min-width:    62px;
+  padding-top:  2px;
 }
 .top5-badge {
   font-size:    0.74rem !important;
   padding:      3px 9px !important;
 }
+/* Standalone bar (legacy, kept for backward compat) */
 .top5-bar {
   width:        100%;
   height:       4px;
