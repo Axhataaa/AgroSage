@@ -42,34 +42,42 @@ python app.py
 
 ## 📡 API Reference
 
-| Endpoint | Method | Auth | Description |
-|---|---|---|---|
-| `/api/auth/signup` | POST | — | Create account, returns JWT |
-| `/api/auth/login` | POST | — | Verify credentials, returns JWT |
-| `/api/auth/me` | GET | JWT | Current user profile |
-| `/api/recommend` | POST | JWT | Crop recommendation |
-| `/api/history` | GET | JWT | Past recommendations |
-| `/api/detect` | POST | JWT | Plant disease detection |
-| `/api/weather` | GET | — | Weather by lat/lon |
-| `/api/soil` | GET | — | Soil nutrients by lat/lon |
-| `/api/importance` | GET | — | ML feature importances |
-| `/api/stats` | GET | — | Model metadata |
-| `/api/health` | GET | — | System health check |
+| Endpoint           | Method | Auth | Description                     |
+| ------------------ | ------ | ---- | ------------------------------- |
+| `/api/auth/signup` | POST   | —    | Create account, returns JWT     |
+| `/api/auth/login`  | POST   | —    | Verify credentials, returns JWT |
+| `/api/auth/me`     | GET    | JWT  | Current user profile            |
+| `/api/recommend`   | POST   | JWT  | Crop recommendation             |
+| `/api/history`     | GET    | JWT  | Past recommendations            |
+| `/api/detect`      | POST   | JWT  | Plant disease detection         |
+| `/api/weather`     | GET    | —    | Weather by lat/lon              |
+| `/api/soil`        | GET    | —    | Soil nutrients by lat/lon       |
+| `/api/importance`  | GET    | —    | ML feature importances          |
+| `/api/stats`       | GET    | —    | Model metadata                  |
+| `/api/health`      | GET    | —    | System health check             |
 
 ### POST `/api/recommend`
+
 ```json
 {
-  "N": 80, "P": 40, "K": 45,
-  "temperature": 25, "humidity": 70,
-  "ph": 6.5, "rainfall": 180
+  "N": 80,
+  "P": 40,
+  "K": 45,
+  "temperature": 25,
+  "humidity": 70,
+  "ph": 6.5,
+  "rainfall": 180
 }
 ```
+
 Returns: `{ top_crop, confidence, alternatives[], field, result_id }`
 
 ### GET `/api/soil?lat=26.9&lon=75.8`
+
 Returns: `{ N, P, K, ph, region, source }`
 
 ### GET `/api/importance`
+
 Returns: `{ source: "model"|"fallback", features: [{key, label, score, pct}] }`
 
 ---
@@ -127,6 +135,7 @@ The disease model runs in **stub mode** by default (no TensorFlow required).
 This returns a realistic demo response so the UI works during development.
 
 To enable real inference:
+
 1. `pip install tensorflow>=2.14.0`
 2. Train or download a PlantVillage model:
    ```bash
@@ -144,6 +153,7 @@ agro-climatic zones worldwide (South Asia, SE Asia, Africa, Americas,
 Europe, Oceania).
 
 **To improve accuracy**, replace `api/soil.py` with a raster lookup against:
+
 - [ISRIC SoilGrids REST API](https://www.isric.org/explore/soilgrids)
 - [FAO Global Soil Database](http://www.fao.org/soils-portal/)
 - Custom CSV keyed on country/admin region
@@ -156,6 +166,7 @@ The API contract (`N, P, K, ph, region, source`) stays the same.
 
 SQLite by default (`agrosage.db` in project root).
 For PostgreSQL (Render, Railway, Supabase):
+
 ```dotenv
 DATABASE_URL=postgresql://user:pass@host:5432/agrosage
 ```
@@ -163,7 +174,6 @@ DATABASE_URL=postgresql://user:pass@host:5432/agrosage
 ---
 
 ## 🔑 Environment Variables
-
 
 ```dotenv
 SECRET_KEY=<random 32+ char string>
