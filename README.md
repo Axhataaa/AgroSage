@@ -81,7 +81,7 @@ agrosage_v2/
 ├── app.py                    # Flask factory + blueprint registration
 ├── config.py                 # All configuration (env-driven)
 ├── requirements.txt
-├── .env.example
+├── .env
 │
 ├── api/
 │   ├── auth.py               # POST /api/auth/signup, /login, GET /me
@@ -164,7 +164,6 @@ DATABASE_URL=postgresql://user:pass@host:5432/agrosage
 
 ## 🔑 Environment Variables
 
-Copy `.env.example` → `.env` and fill in:
 
 ```dotenv
 SECRET_KEY=<random 32+ char string>
